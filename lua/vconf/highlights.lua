@@ -7,7 +7,7 @@
 -- `fg/bg/ctermfg/ctermbg/bold/italic/underline`
 
 -- 光标
-vim.api.nvim_set_hl(0,"Cursor", {fg="#000000",bg="#ffa500"}) --Rin color
+vim.api.nvim_set_hl(0,"Cursor", {fg="#39c5bb",bg="#ffffff"}) --miku color
 
 vim.opt.guicursor = {
 	--format:
@@ -30,7 +30,7 @@ vim.api.nvim_set_hl(0, "LineNr",      { fg="#39c5bb" }) -- Miku color
 vim.api.nvim_set_hl(0, "CursorLineNr",{ fg="#ffa500" }) -- Rin color
 
 -- 匹配
-vim.api.nvim_set_hl(0, "MatchParen",{ fg="#ffa500",bg="#222222" })
+vim.api.nvim_set_hl(0, "MatchParen",{ fg="#000000",bg="#ffa500" })
 
 
 -- 搜索
@@ -77,22 +77,24 @@ vim.api.nvim_set_hl(0, "MatchParen",{ fg="#ffa500",bg="#222222" })
 --vim.api.nvim_set_hl(0, "EndOfBuffer"  ,     { fg="" })
 
 
--- 定义 Neovim 终端的 16 种 ANSI 颜色
+-- 终端 16 色调色板
 vim.opt.termguicolors = true
-vim.g.terminal_color_0  = "#111111"
-vim.g.terminal_color_1  = "#ff00a5"
-vim.g.terminal_color_2  = "#a5ff00"
-vim.g.terminal_color_3  = "#ffa500"
-vim.g.terminal_color_4  = "#00a5ff"
-vim.g.terminal_color_5  = "#a500ff"
-vim.g.terminal_color_6  = "#39c5bb"
-vim.g.terminal_color_7  = "#ffffff"
-vim.g.terminal_color_8  = "#393939"
-vim.g.terminal_color_9  = "#a50000"
-vim.g.terminal_color_10 = "#00ffa5"
-vim.g.terminal_color_11 = "#ffe211"
-vim.g.terminal_color_12 = "#11ffa5"
-vim.g.terminal_color_13 = "#ff11a5"
-vim.g.terminal_color_14 = "#00ffff"
-vim.g.terminal_color_15 = "#000000"
+
+vim.g.terminal_color_0  = "#000000" -- black
+vim.g.terminal_color_1  = "#a50000" -- red
+vim.g.terminal_color_2  = "#a5ff00" -- green
+vim.g.terminal_color_3  = "#ffa500" -- yellow
+vim.g.terminal_color_4  = "#00a5ff" -- blue
+vim.g.terminal_color_5  = "#a500ff" -- magenta
+vim.g.terminal_color_6  = "#39c5bb" -- cyan
+vim.g.terminal_color_7  = "#aaaaaa" -- white
+vim.g.terminal_color_8  = "#393939" -- bright black
+vim.g.terminal_color_9  = "#ff0044" -- bright red
+vim.g.terminal_color_10 = "#00ffa5" -- bright green
+vim.g.terminal_color_11 = "#ffe211" -- bright yellow
+vim.g.terminal_color_12 = "#00bbff" -- bright blue
+vim.g.terminal_color_13 = "#ff11a5" -- bright magenta
+vim.g.terminal_color_14 = "#11ffff" -- bright cyan
+vim.g.terminal_color_15 = "#ffffff" -- bright white
+
 

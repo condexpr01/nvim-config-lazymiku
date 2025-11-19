@@ -17,15 +17,21 @@ vim.keymap.set('n', '<leader>c', '<cmd>close<CR>', { noremap = true })
 vim.keymap.set('n', '<leader>q', '<cmd>q<CR>', { noremap = true })
 vim.keymap.set('n', '<leader>Q', '<cmd>q!<CR>', { noremap = true })
 
--- 快速切换窗口
+-- 快速窗口间移动
 vim.keymap.set('n', '<leader>h', '<C-w>h', { noremap = true })
 vim.keymap.set('n', '<leader>j', '<C-w>j', { noremap = true })
 vim.keymap.set('n', '<leader>k', '<C-w>k', { noremap = true })
 vim.keymap.set('n', '<leader>l', '<C-w>l', { noremap = true })
 
+-- 快速移动窗口
+vim.keymap.set('n', '<leader>H', '<C-w>H', { noremap = true })
+vim.keymap.set('n', '<leader>J', '<C-w>J', { noremap = true })
+vim.keymap.set('n', '<leader>K', '<C-w>K', { noremap = true })
+vim.keymap.set('n', '<leader>L', '<C-w>L', { noremap = true })
+
 -- 快速分裂窗口
-vim.keymap.set('n', '<leader>vs', '<cmd>vsplit<CR>', { noremap = true })
-vim.keymap.set('n', '<leader>sp', '<cmd>split<CR>',  { noremap = true })
+vim.keymap.set('n', '<leader>v', '<cmd>vsplit<CR>', { noremap = true })
+vim.keymap.set('n', '<leader>s', '<cmd>split<CR>',  { noremap = true })
 
 
 -- `noremap=true`不递归

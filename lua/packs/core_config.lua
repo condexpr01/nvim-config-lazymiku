@@ -8,9 +8,14 @@ return {
 
 	config = function()
 
-		-- cappuccino
-		vim.cmd("colorscheme catppuccin")
-		require("vconf.highlights")
+		--判断防止真终端中颜色问题
+		if (vim.fn.has("gui_running") == 1) then
+			-- cappuccino
+			vim.cmd("colorscheme catppuccin")
+			require("vconf.highlights")
+		else
+			vim.cmd("colorscheme default")
+		end
 
 		vim.api.nvim_create_autocmd({"BufEnter"}, {
 			callback = function()

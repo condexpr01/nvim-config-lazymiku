@@ -56,27 +56,30 @@ return {
 				type = "group",
 				val = {
 					dashboard.button("c", "⚡  "
-					.. " CmpStatus","<cmd>lua require\"cmp\"<cr><cmd>CmpStatus<cr>"),
+					.. " CmpStatus","<cmd>lua require\"cmp\"<cr>"
+					.. "<cmd>CmpStatus<cr>"),
 
 					dashboard.button("h", "⚡  "
 					.. " Checkhealth","<cmd>checkhealth<cr>"),
 
-					dashboard.button("f", "⚡  "
-					.. " MYVIMRC","<cmd>e $MYVIMRC<cr>"),
-
-					dashboard.button("t", "⚡  "
-					.. " TSModuleInfo","<cmd>lua require\"nvim-treesitter\"<cr><cmd>TSInstallInfo<cr>"),
-
 					dashboard.button("l", "⚡󰒲 " .. " Lazy","<cmd>Lazy<cr>"),
 
 					dashboard.button("m", "⚡  "
-					.. " Mason","<cmd>lua require\"mason\"<cr><cmd>Mason<cr>"),
+					.. " Mason","<cmd>lua require\"mason\"<cr>"
+					.. "<cmd>Mason<cr>"),
 
 					dashboard.button("n", "⚡  "
-					.. " stdpath config","<cmd>lua vim.cmd(\"e \".. vim.fn.stdpath(\"config\"))<cr>"),
+					.. " nvim config","<cmd>lua require(\"nvim-tree\")<cr>"
+					.. "<cmd>lua vim.cmd(\"NvimTreeToggle \".. vim.fn.stdpath(\"config\"))<cr>"),
 
 					dashboard.button("p", "⚡  "
-					.. " LspInfo","<cmd>lua require\"mason-lspconfig\"<cr><cmd>LspInfo<cr>"),
+					.. " LspInfo","<cmd>lua require\"mason-lspconfig\"<cr>"
+					.. "<cmd>LspInfo<cr>"),
+
+					dashboard.button("t", "⚡  "
+					.. " TSModuleInfo","<cmd>lua require\"nvim-treesitter\"<cr>"
+					.. "<cmd>TSInstallInfo<cr>"),
+
 				},
 				opts = {spacing = 0}
 			},

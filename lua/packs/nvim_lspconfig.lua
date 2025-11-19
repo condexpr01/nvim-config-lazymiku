@@ -70,7 +70,7 @@ CompileFlags:
 	if jit.os == "Windows" then
 		path = uv.os_getenv("LOCALAPPDATA").."/clangd/config.yaml"
 	elseif jit.os == "Linux" or jit.os == "OSX" then
-		path = uv.os_getenv("HOME").."/clangd/config.yaml"
+		path = uv.os_getenv("HOME").."/.config/clangd/config.yaml"
 	else
 		path = uv.os_getenv("XDG_CONFIG_HOME").."/clangd/config.yaml"
 	end
