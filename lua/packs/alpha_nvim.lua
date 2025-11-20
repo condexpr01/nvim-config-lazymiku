@@ -48,7 +48,7 @@ return {
 					.. " Works cmds","<cmd>lua require\"works.wcmds\"(1)<cr>"),
 
 					dashboard.button("e", "⚡  "
-					.. " edit Works cmds","<cmd>lua require\"works.wcmds\"(0)<cr>"),
+					.. " Edit Works cmds","<cmd>lua require\"works.wcmds\"(0)<cr>"),
 				},
 				opts = {spacing = 0}
 			},
@@ -69,7 +69,7 @@ return {
 					.. "<cmd>Mason<cr>"),
 
 					dashboard.button("n", "⚡  "
-					.. " nvim config","<cmd>lua require(\"nvim-tree\")<cr>"
+					.. " Nvim config","<cmd>lua require(\"nvim-tree\")<cr>"
 					.. "<cmd>lua vim.cmd(\"NvimTreeToggle \".. vim.fn.stdpath(\"config\"))<cr>"),
 
 					dashboard.button("p", "⚡  "

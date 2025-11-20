@@ -21,7 +21,7 @@ return {
 			"ini","json","yaml",
 			"make","cmake",
 			"vim","vimdoc",
-			"git_config","git_rebase",
+			"gitcommit","git_config","git_rebase",
 			"awk","bash",
 			"printf","query","diff",
 			"javascript","jsdoc",

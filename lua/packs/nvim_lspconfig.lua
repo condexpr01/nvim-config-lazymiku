@@ -86,40 +86,56 @@ CompileFlags:
 end
 
 
--- `treesitter`判断位置是否处于注释节点
+
+-- 判断 (row, col) 是否落在注释节点里
 local function in_comment(bufnr, row, col)
-	local lang = vim.treesitter.language.get_lang(vim.bo[bufnr].filetype)
-	if not lang then return false end
+  -- get language，失败就当成“不是注释”
+  local ok, lang = pcall(vim.treesitter.language.get_lang, vim.bo[bufnr].filetype)
+  if not ok or not lang then return false end
 
-	local parser = vim.treesitter.get_parser(bufnr, lang)
-	if not parser then return false end
+  -- get parser，失败就当成“不是注释”
+  ok, lang = pcall(vim.treesitter.get_parser, bufnr, lang)
+  if not ok or not lang then return false end
+  local parser = lang   -- pcall 返回的第二个值才是 parser
 
-	local tree = parser:parse()[1]
-	if not tree then return false end
+  -- parse 树
+  ok, lang = pcall(parser.parse, parser)
+  if not ok or not lang then return false end
+  local tree = lang[1]
 
-	local root = tree:root()
-	local node = root:descendant_for_range(row, col, row, col)
+  -- 取根节点
+  local root = tree:root()
+  if not root then return false end
 
-	while node do
-		if node:type():find("comment") then
-			return true
-		end
-		node = node:parent()
-	end
-
-	return false
+  -- 找最小覆盖节点
+  local node = root:descendant_for_range(row, col, row, col)
+  while node do
+    local t = node:type()
+    -- 大部分语言注释节点都叫 comment / line_comment / block_comment
+    if t:find("comment") then
+      return true
+    end
+    node = node:parent()
+  end
+  return false
 end
 
--- 过滤注释中的诊断
+-- 过滤掉落在注释里的诊断
 local function filter_diags(diags, bufnr)
-	local out = {}
-	for _, d in ipairs(diags) do
-		local r = d.range.start
-		if not in_comment(bufnr, r.line, r.character) then
-			table.insert(out, d)
-		end
-	end
-	return out
+  local out = {}
+  for _, d in ipairs(diags) do
+    local r = d.range.start
+
+    -- 防止上面函数意外抛错
+    local ok, yes = pcall(in_comment, bufnr, r.line, r.character)
+
+	-- 不是注释才保留
+    if not (ok and yes) then
+      table.insert(out, d)
+    end
+  end
+
+  return out
 end
 
 
