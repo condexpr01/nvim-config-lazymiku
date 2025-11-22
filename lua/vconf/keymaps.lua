@@ -57,11 +57,13 @@ vim.opt.matchpairs:append({
 	"“:”",
 	"（:）"
 
-	-- use `*' `#` to jump, as different char can be matchpairs
+	-- use `f' `F`+`"` `'` to instead, as different char can be matchpairs
+	-- don't want more plugins (autopairs can fix this)
 	-- only 
 	--"':'",
 	--'":"',
 })
+
 
 
 
