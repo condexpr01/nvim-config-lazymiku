@@ -46,11 +46,9 @@ vim.keymap.set('i', '[', '[]<Left>', { noremap = true })
 -- `vim.keymap.set('i', '<', '<><Left>', { noremap = true })`
 
 vim.opt.matchpairs:append({
-	-- 常规pairs
+	-- english pairs
 	"(:)",
 	"{:}",
-	"\":\"",
-	"\':\'",
 	"[:]",
 	"<:>",
 
@@ -58,7 +56,25 @@ vim.opt.matchpairs:append({
 	"‘:’",
 	"“:”",
 	"（:）"
+
+	-- use `*' `#` to jump, as different char can be matchpairs
+	-- only 
+	--"':'",
+	--'":"',
 })
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -125,10 +125,9 @@ return {
 				local stats = require("lazy").stats()
 				dashboard.section.footer.val = "⚡ Neovim loaded "
 				.. stats.loaded.. "/".. stats.count .. " plugins "
-				.. "in "  .. stats.startuptime .. "ms"
-				.. "(D".. stats.times.LazyDone .. "/"
-				.. "S".. stats.times.LazyStart .. "/"
-				.. "U".. stats.times.UIEnter .. ")"
+				.. "in "  .. stats.startuptime .. "ms\n"
+				.. "⚡ Done: ".. stats.times.LazyDone .. "ms "
+				.. "⚡ Start: ".. stats.times.LazyStart .. "ms"
 				pcall(vim.cmd.AlphaRedraw)
 			end,
 		})
