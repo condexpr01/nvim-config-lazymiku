@@ -7,3 +7,4 @@ require("vconf.lazy")
 --`XDG_CONFIG_HOME==vim.fn.stdpath("config")`
 --`XDG_DATA_HOME==vim.fn.stdpath("data")`
 --`XDG_CACHE_HOME==vim.fn.stdpath("cache")`
+

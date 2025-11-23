@@ -1,5 +1,7 @@
 
+#include <cstdio>
 #include <fstream>
+#include <utility>
 #include <windows.h>
 
 namespace winapi{
@@ -22,6 +24,8 @@ BOOL winapi::enum_child_window_proc(HWND h,LPARAM p){
 
 	return true;
 }
+
+
 
 BOOL winapi::enum_window_proc(HWND h,LPARAM p){
 
@@ -48,11 +52,6 @@ void winapi::enum_all_window_name(void){
 
 	EnumWindows(enum_window_proc, (LPARAM)&p);
 }
-
-
-
-
-
 
 
 

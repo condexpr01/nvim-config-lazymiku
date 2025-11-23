@@ -156,13 +156,13 @@ return {
 		local orig = vim.lsp.handlers["textDocument/publishDiagnostics"]
 
 		vim.lsp.handlers["textDocument/publishDiagnostics"] =
-			function(err, result, ctx, config)
-				if result and result.diagnostics then
-					local bufnr = vim.uri_to_bufnr(result.uri)
-					result.diagnostics = filter_diags(result.diagnostics, bufnr)
-				end
-				return orig(err, result, ctx, config)
+		function(err, result, ctx, config)
+			if result and result.diagnostics then
+				local bufnr = vim.uri_to_bufnr(result.uri)
+				result.diagnostics = filter_diags(result.diagnostics, bufnr)
 			end
+			return orig(err, result, ctx, config)
+		end
 
 	end,
 

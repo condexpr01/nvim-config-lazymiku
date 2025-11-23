@@ -2,6 +2,8 @@
 
 --cappuccino
 return {
+	--enabled = false,
+
 	"catppuccin/nvim",
 
 	name = "catppuccin",
@@ -9,3 +11,4 @@ return {
 	priority = 65535,
 	lazy = false
 }
+

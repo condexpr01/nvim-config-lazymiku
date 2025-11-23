@@ -109,12 +109,12 @@ return {
 	{
 
 		{ name = 'luasnip',priority=39  },
-		{ name = 'nvim_lsp',priority=13 },
-		{ name = 'nvim_lsp_signature_help',priority=11 },
-		{ name = 'buffer',priority=3 },
+
+
+		{ name = 'nvim_lsp_signature_help',priority=24 },
 
 		--for project
-		{ name = 'tags',priority=1 ,
+		{ name = 'tags',priority=22 ,
 		option={
 			complete_defer=100,
 			max_iterms=10,
@@ -122,6 +122,12 @@ return {
 			exact_match=false,
 			current_buffer_only=false
 		}},
+
+		{ name = 'buffer',priority= 18 },
+
+		{ name = 'copilot',priority=16 },
+		{ name = 'nvim_lsp',priority=13 },
+
 
 	},
 	{
@@ -139,6 +145,7 @@ return {
 				path     = "[PATH]",
 				cmdline  = "[CMDLINE]",
 				tags     = "[TAGS]",
+				copilot  = "[COPILOT]",
 			})[entry.source.name]
 			return vim_item
 		end,
@@ -158,6 +165,9 @@ return {
 		'hrsh7th/cmp-path',
 		'hrsh7th/cmp-cmdline',
 
+		--tags sources
+		'quangnguyen30192/cmp-nvim-tags',
+
 		-- snippet sources
 		{
 			'L3MON4D3/LuaSnip',
@@ -167,9 +177,14 @@ return {
 
 		'saadparwaiz1/cmp_luasnip',
 
-		--tags sources
-		'quangnguyen30192/cmp-nvim-tags',
 
+		--copilot-cmp
+		{
+			"zbirenbaum/copilot-cmp",
+			config = function ()
+				require("copilot_cmp").setup()
+			end
+		}
 
 	},
 

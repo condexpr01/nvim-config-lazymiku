@@ -45,6 +45,7 @@ vim.keymap.set('i', '[', '[]<Left>', { noremap = true })
 -- `cpp` hates this
 -- `vim.keymap.set('i', '<', '<><Left>', { noremap = true })`
 
+-- % jump
 vim.opt.matchpairs:append({
 	-- english pairs
 	"(:)",
@@ -55,15 +56,25 @@ vim.opt.matchpairs:append({
 	-- 中文pairs
 	"‘:’",
 	"“:”",
-	"（:）"
+	"（:）",
+	"【:】",
+	"《:》",
 
-	-- use `f' `F`+`"` `'` to instead, as different char can be matchpairs
-	-- don't want more plugins (autopairs can fix this)
-	-- only 
+	--  others
+	"「:」",
+	"『:』",
+	"〈:〉",
+
+	--  add more if needed
+
+
+	-- synxtax pairs and same char pairs
+	-- use vim-matchup plugin to support these
+	-- as different char can be matchpairs
+
 	--"':'",
 	--'":"',
 })
-
 
 
 
