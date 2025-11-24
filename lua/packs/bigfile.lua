@@ -1,5 +1,28 @@
 ---@diagnostic disable: undefined-global, unused-local
 
+local function exec_bigfile_autocmds()
+
+	local bigfile_ok, _ = pcall(require, "bigfile")
+
+	if (bigfile_ok) then
+
+		vim.g.force_bigfile = true
+
+		-- bigfile plugin will set a buffer variable "bigfile_detected"
+		-- must delete it first to retrigger the autocmds
+		vim.api.nvim_buf_del_var(0,"bigfile_detected")
+
+		vim.api.nvim_exec_autocmds("BufReadPre", {buffer = 0})
+		vim.api.nvim_exec_autocmds("BufReadPost", {buffer = 0})
+
+		vim.g.force_bigfile = nil
+
+
+	end
+
+end
+
+
 return {
 
 	"LunarVim/bigfile.nvim",
@@ -10,10 +33,12 @@ return {
 
 	opts={
 		-- size of the file in MiB, the plugin round file sizes to the closest MiB
-		filesize = 2,
+		filesize = 1,
 
 		-- autocmd pattern or function see <### Overriding the detection of big files>
-		pattern = { "*" },
+		-- vim.g.force_bigfile can be set to true to force bigfile mode
+		-- pattern = { "*" , function () return vim.g.force_bigfile end },
+		pattern = function () return vim.g.force_bigfile end,
 
 
 		-- features to disable
@@ -35,12 +60,14 @@ return {
 			"matchparen",
 			"vimopts",
 			"filetype",
+
+			--[[
 			{
 				name = "mini.indentscope",
 				disable = function (buf)
 					vim.b[buf].miniindentscope_disable = true
 				end
-			},
+			},]]
 
 			{
 				name = "cmp",
@@ -56,30 +83,27 @@ return {
 	},
 
 	config = function(_, opts)
+
+		--initialize force_bigfile to false, use pattern '*'
+		vim.g.force_bigfile = false
 		require("bigfile").setup(opts)
+
+	vim.api.nvim_create_autocmd({ "TextChanged", "TextChangedI", "TextChangedP" }, {
+		callback = function()
+			local bufnr = vim.api.nvim_get_current_buf()
+			local size = vim.api.nvim_buf_get_offset(bufnr, vim.api.nvim_buf_line_count(bufnr))
+
+			if (size > 2 * 1024 * 1024) then
+				exec_bigfile_autocmds()
+				print("Current size: " .. size .. " bytes" .. " bigfile optimizations have been applied ")
+			end
+
+		end,
+	})
+
+
 	end,
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 

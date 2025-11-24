@@ -65,20 +65,8 @@ if find_executable("ctags.exe") or find_executable("ctags") then
 	  vim.cmd([[!ctags -R --c-kinds=+p --fields=+iaS --extras=+q --exclude=\* --exclude-exception=\*.h %:h]])
 	  vim.cmd("pwd")
 	end, { desc = "Generate tags by using ctags" })
+
 end
 
 
--- state log
-if next(state) then
-	for _,v in pairs(state) do
-		vim.api.nvim_echo({{v}},true,{})
-	end
-end
-
-
-
-
-
-
-
-
+return state

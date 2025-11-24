@@ -1,5 +1,6 @@
 ---@diagnostic disable: undefined-global
 
+
 local lsp_keys = {
 	-- 代码跳转
 	{ "gi", vim.lsp.buf.implementation, desc = "Go to implementation", mode = "n" },
@@ -89,53 +90,54 @@ end
 
 -- 判断 (row, col) 是否落在注释节点里
 local function in_comment(bufnr, row, col)
-  -- get language，失败就当成“不是注释”
-  local ok, lang = pcall(vim.treesitter.language.get_lang, vim.bo[bufnr].filetype)
-  if not ok or not lang then return false end
+	-- get language，失败就当成“不是注释”
+	local ok, lang = pcall(vim.treesitter.language.get_lang, vim.bo[bufnr].filetype)
+	if not ok or not lang then return false end
 
-  -- get parser，失败就当成“不是注释”
-  ok, lang = pcall(vim.treesitter.get_parser, bufnr, lang)
-  if not ok or not lang then return false end
-  local parser = lang   -- pcall 返回的第二个值才是 parser
+	-- get parser，失败就当成“不是注释”
+	ok, lang = pcall(vim.treesitter.get_parser, bufnr, lang)
+	if not ok or not lang then return false end
+	local parser = lang   -- pcall 返回的第二个值才是 parser
 
-  -- parse 树
-  ok, lang = pcall(parser.parse, parser)
-  if not ok or not lang then return false end
-  local tree = lang[1]
+	-- parse 树
+	ok, lang = pcall(parser.parse, parser)
+	if not ok or not lang then return false end
+	local tree = lang[1]
 
-  -- 取根节点
-  local root = tree:root()
-  if not root then return false end
+	-- 取根节点
+	local root = tree:root()
+	if not root then return false end
 
-  -- 找最小覆盖节点
-  local node = root:descendant_for_range(row, col, row, col)
-  while node do
-    local t = node:type()
-    -- 大部分语言注释节点都叫 comment / line_comment / block_comment
-    if t:find("comment") then
-      return true
-    end
-    node = node:parent()
-  end
-  return false
+	-- 找最小覆盖节点
+	local node = root:descendant_for_range(row, col, row, col)
+	while node do
+		local t = node:type()
+		-- 大部分语言注释节点都叫 comment / line_comment / block_comment
+		if t:find("comment") then
+			return true
+		end
+		node = node:parent()
+	end
+	return false
 end
+
 
 -- 过滤掉落在注释里的诊断
 local function filter_diags(diags, bufnr)
-  local out = {}
-  for _, d in ipairs(diags) do
-    local r = d.range.start
+	local out = {}
+	for _, d in ipairs(diags) do
+		local r = d.range.start
 
-    -- 防止上面函数意外抛错
-    local ok, yes = pcall(in_comment, bufnr, r.line, r.character)
+		-- 防止上面函数意外抛错
+		local ok, yes = pcall(in_comment, bufnr, r.line, r.character)
 
-	-- 不是注释才保留
-    if not (ok and yes) then
-      table.insert(out, d)
-    end
-  end
+		-- 不是注释才保留
+		if not (ok and yes) then
+			table.insert(out, d)
+		end
+	end
 
-  return out
+	return out
 end
 
 
@@ -152,7 +154,7 @@ return {
 			vim.lsp.enable(k)
 		end
 
-		-- Hook LSP注释诊断处理
+		-- handler LSP注释诊断处理
 		local orig = vim.lsp.handlers["textDocument/publishDiagnostics"]
 
 		vim.lsp.handlers["textDocument/publishDiagnostics"] =
