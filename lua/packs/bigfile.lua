@@ -10,7 +10,7 @@ local function exec_bigfile_autocmds()
 
 		-- bigfile plugin will set a buffer variable "bigfile_detected"
 		-- must delete it first to retrigger the autocmds
-		vim.api.nvim_buf_del_var(0,"bigfile_detected")
+		pcall(vim.api.nvim_buf_del_var,0,"bigfile_detected")
 
 		vim.api.nvim_exec_autocmds("BufReadPre", {buffer = 0})
 		vim.api.nvim_exec_autocmds("BufReadPost", {buffer = 0})
