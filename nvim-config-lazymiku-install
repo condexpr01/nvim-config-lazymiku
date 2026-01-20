@@ -1,0 +1,33 @@
+
+install_to() {
+	local prefix=${PREFIX:-/usr}
+
+	if [ -d "$1" ]; then
+		echo "Installing nvim-config-lazymiku to $1"
+		cp -r "${prefix}/share/nvim-config-lazymiku/*" "$1"
+	elif [ -n "$1" ]; then
+		echo "Error: $1 is not a directory"
+	else
+		
+		local default_config_dir answer
+
+		if [ -d "$XDG_CONFIG_HOME" ]; then
+			default_config_dir="$XDG_CONFIG_HOME/nvim"
+		else
+			default_config_dir="$HOME/.config/nvim"
+		fi
+
+		read -p "Install to $default_config_dir? (y/n) " answer
+
+		if [ "$answer" = "y" ] || [ "$answer" = "Y" ]; then
+			mkdir -p "$default_config_dir"
+			echo "Installing nvim-config-lazymiku to $default_config_dir"
+			cp -r "${prefix}/share/nvim-config-lazymiku/"* "$default_config_dir"
+		else
+			echo "Installation cancelled."
+		fi
+
+	fi
+}
+
+install_to "$1"
