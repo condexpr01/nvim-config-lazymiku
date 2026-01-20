@@ -11,7 +11,7 @@ end
 
 
 local function edit_mode()
-	vim.cmd("e " .. vim.fn.stdpath("config") .. "/lua/works/wcmds.lua")
+	vim.cmd("e " .. vim.fn.stdpath("config") .. "/lua/tasks/taskscmd.lua")
 end
 
 

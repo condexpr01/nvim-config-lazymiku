@@ -5,7 +5,7 @@ vim.opt.mouse = ""              --禁止鼠标,"a"在所有下启动
 vim.opt.clipboard = "unnamedplus" --剪切板
 
 if vim.opt.guifont then
-	vim.opt.guifont = "Hack, Noto Sans CJK SC:h13"
+	vim.opt.guifont = "Hack, Sarasa UI SC:h13"
 end
 
 vim.opt.number = true           -- 行号

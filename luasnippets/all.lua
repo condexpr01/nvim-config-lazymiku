@@ -24,7 +24,7 @@ return
 
 },
 
--- I HATE THIS:Auto snippets
--- BAN
+-- Auto snippets
 {}
+
 

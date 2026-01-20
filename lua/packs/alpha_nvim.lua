@@ -45,24 +45,25 @@ return {
 				type = "group",
 				val = {
 					dashboard.button("w", "⚡  "
-					.. " Works cmds","<cmd>lua require\"works.wcmds\"(1)<cr>"),
+					.. " Load tasks","<cmd>lua require\"tasks/taskscmd\"(1)<cr>"),
 
 					dashboard.button("e", "⚡  "
-					.. " Edit Works cmds","<cmd>lua require\"works.wcmds\"(0)<cr>"),
+					.. " Edit tasks","<cmd>lua require\"tasks/taskscmd\"(0)<cr>"),
 				},
 				opts = {spacing = 0}
 			},
 			{
 				type = "group",
 				val = {
+
+					dashboard.button("l", "⚡󰒲 " .. " Lazy","<cmd>Lazy<cr>"),
+
 					dashboard.button("c", "⚡  "
 					.. " CmpStatus","<cmd>lua require\"cmp\"<cr>"
 					.. "<cmd>CmpStatus<cr>"),
 
 					dashboard.button("h", "⚡  "
 					.. " Checkhealth","<cmd>checkhealth<cr>"),
-
-					dashboard.button("l", "⚡󰒲 " .. " Lazy","<cmd>Lazy<cr>"),
 
 					dashboard.button("m", "⚡  "
 					.. " Mason","<cmd>lua require\"mason\"<cr>"

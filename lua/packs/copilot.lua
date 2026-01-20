@@ -9,7 +9,6 @@ return {
 	},
 
 	cmd = "Copilot",
-	build = "Copilot auth",
 
 	event = "VeryLazy",
 
@@ -67,24 +66,4 @@ return {
 	end,
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

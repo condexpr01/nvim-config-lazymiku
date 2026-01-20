@@ -12,7 +12,7 @@ local function load_lazy(lazy_setup_table)
 	if not (vim.uv or vim.loop).fs_stat(lazy_path) then
 
 		--git用`ssh`代替路径
-		require("vconf.git_ssh")(true)
+		--require("vconf.git_ssh")(true)
 
 		-- git clone
 		vim.fn.system({
@@ -27,7 +27,7 @@ local function load_lazy(lazy_setup_table)
 
 	if vim.v.shell_error ~= 0 then
 		vim.api.nvim_echo(
-			{{"Fatal:git didn't clone lazy package manager."}},
+			{{"Fatal: git didn't clone lazy package manager."}},
 			true, {})
 
 		do return false end
@@ -45,7 +45,6 @@ end
 
 
 local opts= {
-
 
 	spec = {
 		{import="packs" },

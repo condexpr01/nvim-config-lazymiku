@@ -54,31 +54,51 @@ local lsp_opts = {
 local function clangd_config()
 	local uv = vim.loop
 
-	local yaml_config = [[
-CompileFlags:
-	Add:
-		- --target=x86_64-w64-windows-gnu
-		- -I${XDG_CONFIG_HOME}/nvim/vapi
-]]
+	--定位路径
+	local path
 
+	local yaml_config
+
+	if jit.os == "Windows" then
+		--msys2
+		yaml_config = [[
+CompileFlags:
+  Add:
+    - --target=x86_64-w64-windows-gnu
+    - -I${XDG_CONFIG_HOME}/nvim/vapi
+]]
+		path = uv.os_getenv("LOCALAPPDATA").."/clangd/config.yaml"
+
+	elseif jit.os == "Linux" then
+		--pacman -S mingw-w64-headers
+		yaml_config = [[
+CompileFlags:
+  Add:
+    - -I${XDG_CONFIG_HOME}/nvim/vapi
+]]
+		path = uv.os_getenv("XDG_CONFIG_HOME").."/clangd/config.yaml"
+			or uv.os_getenv("HOME").."/.config/clangd/config.yaml"
+
+	else
+		yaml_config = [[
+CompileFlags:
+  Add:
+    - -I${XDG_CONFIG_HOME}/nvim/vapi
+]]
+		path = uv.os_getenv("XDG_CONFIG_HOME").."/clangd/config.yaml"
+			or uv.os_getenv("HOME").."/.config/clangd/config.yaml"
+	end
+
+	-- 确保目录存在
+	vim.fn.mkdir(vim.fn.fnamemodify(path, ":h"), "p")
+
+
+	--翻译环境变量
 	local real_config = yaml_config:gsub("%${(.-)}",
 		function (env)
 			return uv.os_getenv(env) or ""
 		end)
 
-	local path
-
-	if jit.os == "Windows" then
-		path = uv.os_getenv("LOCALAPPDATA").."/clangd/config.yaml"
-	elseif jit.os == "Linux" or jit.os == "OSX" then
-		path = uv.os_getenv("HOME").."/.config/clangd/config.yaml"
-	else
-		path = uv.os_getenv("XDG_CONFIG_HOME").."/clangd/config.yaml"
-	end
-
-
-	-- 确保目录存在
-	vim.fn.mkdir(vim.fn.fnamemodify(path, ":h"), "p")
 
 	-- 写入内容（保留换行）
 	local f = assert(io.open(path, "w"))
