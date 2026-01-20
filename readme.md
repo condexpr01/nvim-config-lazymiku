@@ -2,7 +2,7 @@
 
 ```shell
 makepkg -si
-nvim-config-lazymiku-install <targetcdir>
+nvim-config-lazymiku-install <target-dir>
 ```
 
 # Index
