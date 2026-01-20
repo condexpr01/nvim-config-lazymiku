@@ -1,3 +1,9 @@
+# Install
+
+```shell
+makepkg -si
+nvim-config-lazymiku-install <targetcdir>
+```
 
 # Index
 [fonts options.lua](#optionslua)
