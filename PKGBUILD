@@ -1,7 +1,7 @@
 # Maintainer: condexpr01(Vito Devlin) <condexpr01@outlook.com>
 PACKAGER='condexpr01(Vito Devlin) <condexpr01@outlook.com>'
 pkgname=nvim-config-lazymiku
-pkgver=2026.01.21.1
+pkgver=2026.02.03.1
 pkgrel=1
 pkgdesc='nvim configuration files'
 arch=('any')
