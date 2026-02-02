@@ -53,7 +53,7 @@ return {
 		view =     {width = 30},
 
 		--简化空文件夹显示
-		renderer = {group_empty = true},
+		renderer = {group_empty = false},
 
 		--过滤不显示
 		filters =  {dotfiles = false},
