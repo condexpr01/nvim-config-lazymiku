@@ -12,7 +12,7 @@ nvim-config-lazymiku-install <target-dir>
 [keybindings keymaps.lua](#keymapslua)
 [keybindings bufferline.lua](#bufferlinelua)
 [keybindings copilot.lua](#copilotlua)
-[keybindings nvim_cmp.lua](#nvim_cmplua)
+[keybindings blink_cmp.lua](#blink_cmplua)
 [keybindings nvim_lspconfig.lua](#nvim_lspconfiglua)
 [keybindings nvim_tree.lua](#nvim_treelua)
 [keybindings telescope.lua](#telescopelua)
@@ -157,7 +157,7 @@ keys = {
 ```
 
 
-## nvim_cmp.lua
+## blink_cmp.lua
 
 | 按键 | 功能 |
 |------|------|
@@ -170,86 +170,36 @@ keys = {
 | `C-b` | 文档向上滚动 |
 | `C-space` | 打开补全 |
 | `C-e`     | 关闭补全 |
+| `C-k`     | 签名signature|
 
 ```lua
 --键位,无选tab space流
-mapping = cmp.mapping.preset.insert({
+local keymap={
+	-- 'none' disable the 'default' preset
+	preset = 'none',
 
-	--选中时确定或打开,不自动选第一个,不选则原样
-	['<Space>'] = cmp.mapping(
-		function(fallback)
-			if cmp.visible() then
-				if cmp.get_selected_entry() then
-					cmp.confirm({select = false})
-				else
-					fallback()
-				end
-			else
-				fallback()
-			end
-		end,{'i','c','s'}),
+	--space做accpet，不然就fallback
+	['<Space>']   = { 'accept', 'fallback' },
 
-	-- Tab：snippet 向后跳转
-	-- `visible`优先于`jumpable`
-	["<Tab>"] = cmp.mapping(function(fallback)
-		local luasnip = require("luasnip")
+	--前后选择
+	['<Tab>']     = { 'select_next', 'fallback' },
+	['<S-Tab>']   = { 'select_prev', 'fallback' },
 
-		if cmp.visible() then
-			cmp.select_next_item({behavior=cmp.SelectBehavior.Select})
-		elseif luasnip.expand_or_jumpable() then
-			luasnip.expand_or_jump()
-		else
-			fallback()
-		end
-	end, { "i","c", "s" }),
+	--显示关闭
+	['<C-space>'] = { 'show', 'show_documentation', 'hide_documentation' },
+	['<C-e>']     = { 'hide', 'fallback' },
 
-	-- Shift-Tab：snippet 向前跳转
-	-- `visible`优先于`jumpable`
-	["<S-Tab>"] = cmp.mapping(function(fallback)
-		local luasnip = require("luasnip")
+	--snippets前后
+	['<C-n>']     = { 'snippet_forward', 'fallback' },
+	['<C-p>']     = { 'snippet_backward', 'fallback' },
 
-		if cmp.visible() then
-			cmp.select_prev_item({behavior=cmp.SelectBehavior.Select})
-		elseif luasnip.jumpable(-1) then
-			luasnip.jump(-1)
-		else
-			fallback()
-		end
-	end, { "i","c","s" }),
+	--文档滚动
+	['<C-b>']     = { 'scroll_documentation_up', 'fallback' },
+	['<C-f>']     = { 'scroll_documentation_down', 'fallback' },
 
-	-- `luasnip` choice node up
-	["<C-j>"] = cmp.mapping(function(fallback)
-		local luasnip = require("luasnip")
-
-		if luasnip.choice_active() then
-			luasnip.change_choice(1)
-		else
-			fallback()
-		end
-	end, { "i","c", "s" }),
-
-	-- `luasnip` choice node down
-	["<C-k>"] = cmp.mapping(function(fallback)
-		local luasnip = require("luasnip")
-
-		if luasnip.choice_active() then
-			luasnip.change_choice(-1)
-		else
-			fallback()
-		end
-	end, { "i","c", "s" }),
-
-	--文档翻滚
-	['<C-f>'] = cmp.mapping.scroll_docs(4),
-	['<C-b>'] = cmp.mapping.scroll_docs(-4),
-
-	--补全打开
-	['<C-space>'] = cmp.mapping.complete(),
-
-	--关闭
-	['<C-e>'] = cmp.mapping.abort(),
-}),
-
+	--函数签名
+	['<C-k>'] = { 'show_signature', 'hide_signature', 'fallback' },
+}
 ```
 
 
