@@ -1,3 +1,4 @@
+
 ---@diagnostic disable: undefined-global, unused-local
 
 local function exec_bigfile_autocmds()
@@ -5,41 +6,33 @@ local function exec_bigfile_autocmds()
 	local bigfile_ok, _ = pcall(require, "bigfile")
 
 	if (bigfile_ok) then
-
-		vim.g.force_bigfile = true
+		vim.b.force_bigfile = true  --pattern control
 
 		-- bigfile plugin will set a buffer variable "bigfile_detected"
 		-- must delete it first to retrigger the autocmds
 		pcall(vim.api.nvim_buf_del_var,0,"bigfile_detected")
 
-		vim.api.nvim_exec_autocmds("BufReadPre", {buffer = 0})
+		vim.api.nvim_exec_autocmds("BufReadPre",  {buffer = 0})
 		vim.api.nvim_exec_autocmds("BufReadPost", {buffer = 0})
 
-		vim.g.force_bigfile = nil
-
-
+		vim.b.force_bigfile = nil   --pattern control
 	end
 
 end
-
 
 return {
 
 	"LunarVim/bigfile.nvim",
 
-	enabled = true,
 	lazy = false,
-	--event = "VeryLazy",
 
 	opts={
-		-- size of the file in MiB, the plugin round file sizes to the closest MiB
-		filesize = 1,
+		-- size of the file in MiB
+		filesize = 1.5,
 
 		-- autocmd pattern or function see <### Overriding the detection of big files>
-		-- vim.g.force_bigfile can be set to true to force bigfile mode
-		-- pattern = { "*" , function () return vim.g.force_bigfile end },
-		pattern = function () return vim.g.force_bigfile end,
-
+		-- vim.b.force_bigfile can be set to true to force bigfile mode
+		pattern = function () return vim.b.force_bigfile end,
 
 		-- features to disable
 		features = {
@@ -51,59 +44,66 @@ return {
 			--filetype	filetype = "" for the buffer
 			--vimopts	swapfile = false foldmethod = "manual" undolevels = -1 undoreload = 0 list = false for the buffer
 			--matchparen	:NoMatchParen globally, currently this feature will stay disabled, even after you close the big file
-
 			"indent_blankline",
 			"illuminate",
 			"lsp",
 			"treesitter",
 			"syntax",
 			"matchparen",
-			"vimopts",
+			-- "vimopts",
 			"filetype",
 
-			--[[
-			{
+			--[[{
 				name = "mini.indentscope",
 				disable = function (buf)
 					vim.b[buf].miniindentscope_disable = true
 				end
 			},]]
 
-			{
-				name = "cmp",
+			--[[{	name = "nvim-cmp",
 				disable = function(buf)
 					local ok, cmp = pcall(require, "cmp")
 					if ok then
 						cmp.setup.buffer({ enabled = false })
 					end
-				end,
-			}
+				end,}]]
 
+			{	name = "cmp-blink",
+				disable = function()
+					vim.b.completion=false
+				end,}
 		},
+
 	},
 
 	config = function(_, opts)
 
-		--initialize force_bigfile to false, use pattern '*'
-		vim.g.force_bigfile = false
 		require("bigfile").setup(opts)
 
-	vim.api.nvim_create_autocmd({ "TextChanged", "TextChangedI", "TextChangedP" }, {
-		callback = function()
-			local bufnr = vim.api.nvim_get_current_buf()
-			local size = vim.api.nvim_buf_get_offset(bufnr, vim.api.nvim_buf_line_count(bufnr))
+		local function bigfile_callback()
+			local _,is_big= pcall(vim.api.nvim_buf_get_var,0,"bigfile_detected")
+			if is_big==1 then return end
 
-			if (size > 2 * 1024 * 1024) then
-				exec_bigfile_autocmds()
-				print("Current size: " .. size .. " bytes" .. " bigfile optimizations have been applied ")
+			if (vim.fn.line2byte(vim.fn.line("$")+1) > 1.5 * 1024 * 1024) then
+				vim.schedule(
+					function()
+						exec_bigfile_autocmds()
+						vim.notify(" Bigfile optimizations have been applied !",
+							vim.log.levels.INFO)
+					end
+				)
 			end
+		end
 
-		end,
-	})
+		local function bigfile_callback_defer_fn()
+			vim.defer_fn(bigfile_callback,139)
+		end
 
+		vim.api.nvim_create_autocmd({ "TextChanged", "TextChangedI", "TextChangedP" },
+			{callback = bigfile_callback_defer_fn})
 
 	end,
-
 }
+
 
 

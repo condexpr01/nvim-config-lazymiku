@@ -58,9 +58,11 @@ return {
 
 					dashboard.button("l", "⚡󰒲 " .. " Lazy","<cmd>Lazy<cr>"),
 
-					dashboard.button("c", "⚡  "
-					.. " CmpStatus","<cmd>lua require\"cmp\"<cr>"
-					.. "<cmd>CmpStatus<cr>"),
+					dashboard.button("c", "⚡  " .. " CopilotChat","<cmd>CopilotChat<cr>"),
+
+					dashboard.button("b", "⚡  "
+					.. " Blinkcmp status","<cmd>lua require\"blink.cmp\"<cr>"
+					.. "<cmd>BlinkCmp status<cr>"),
 
 					dashboard.button("h", "⚡  "
 					.. " Checkhealth","<cmd>checkhealth<cr>"),

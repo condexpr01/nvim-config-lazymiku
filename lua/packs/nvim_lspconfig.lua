@@ -43,99 +43,78 @@ local lsp_opts = {
 			"clangd",
 			"--background-index",
 			"--clang-tidy",
-			"--enable-config", --`$XDG_CONFIG_HOME/clangd/config.yaml`
+			"--enable-config",
 		},
 
 	},
 }
 
--- 源`XDG_CONFIG_HOME/clangd/config.yaml`
--- `clangd`根据平台选择自动生成配置文件
+-- `clangd_config`根据平台选择自动生成配置文件
 local function clangd_config()
 	local uv = vim.loop
+	local path,yaml_config
 
-	--定位路径
-	local path
-
-	local yaml_config
-
+	--msys2
 	if jit.os == "Windows" then
-		--msys2
-		yaml_config = [[
-CompileFlags:
-  Add:
-    - --target=x86_64-w64-windows-gnu
-    - -I${XDG_CONFIG_HOME}/nvim/vapi
-]]
 		path = uv.os_getenv("LOCALAPPDATA").."/clangd/config.yaml"
-
-	elseif jit.os == "Linux" then
-		--pacman -S mingw-w64-headers
-		yaml_config = [[
+		yaml_config =[[
 CompileFlags:
   Add:
-    - -I${XDG_CONFIG_HOME}/nvim/vapi
-]]
-		path = uv.os_getenv("XDG_CONFIG_HOME").."/clangd/config.yaml"
-			or uv.os_getenv("HOME").."/.config/clangd/config.yaml"
+    - --target=x86_64-w64-windows-gnu]]
 
-	else
-		yaml_config = [[
-CompileFlags:
-  Add:
-    - -I${XDG_CONFIG_HOME}/nvim/vapi
-]]
-		path = uv.os_getenv("XDG_CONFIG_HOME").."/clangd/config.yaml"
-			or uv.os_getenv("HOME").."/.config/clangd/config.yaml"
+		-- 确保目录存在(必要时创建)
+		vim.fn.mkdir(vim.fn.fnamemodify(path, ":h"), "p")
+
+		-- 写入内容（保留换行）
+		local f = io.open(path, "w")
+		if f ~= nil then
+			f:write(yaml_config)
+			f:close()
+		end
+
 	end
 
-	-- 确保目录存在
-	vim.fn.mkdir(vim.fn.fnamemodify(path, ":h"), "p")
-
-
-	--翻译环境变量
-	local real_config = yaml_config:gsub("%${(.-)}",
-		function (env)
-			return uv.os_getenv(env) or ""
-		end)
-
-
-	-- 写入内容（保留换行）
-	local f = assert(io.open(path, "w"))
-	f:write(real_config)
-	f:close()
 end
 
 
 
 -- 判断 (row, col) 是否落在注释节点里
 local function in_comment(bufnr, row, col)
-	-- get language，失败就当成“不是注释”
+	-- get_lang，lsp不认这个文件类型就当成“非注释”
 	local ok, lang = pcall(vim.treesitter.language.get_lang, vim.bo[bufnr].filetype)
 	if not ok or not lang then return false end
 
-	-- get parser，失败就当成“不是注释”
-	ok, lang = pcall(vim.treesitter.get_parser, bufnr, lang)
-	if not ok or not lang then return false end
-	local parser = lang   -- pcall 返回的第二个值才是 parser
+	-- get_parser，失败就当成“非注释”
+	local parser
+	ok, parser = pcall(vim.treesitter.get_parser, bufnr, lang)
+	if not ok or not parser then return false end
 
-	-- parse 树
-	ok, lang = pcall(parser.parse, parser)
-	if not ok or not lang then return false end
-	local tree = lang[1]
+	-- parse 语法树
+	local ast
+	ok, ast = pcall(parser.parse, parser)
+	if not ok or not ast then return false end
+	ast = ast[1]
 
 	-- 取根节点
-	local root = tree:root()
+	local root = ast:root()
 	if not root then return false end
 
-	-- 找最小覆盖节点
+	-- 找最小覆盖节点,传入的是start的位置，所以开始和结束都是一样的
 	local node = root:descendant_for_range(row, col, row, col)
 	while node do
+
 		local t = node:type()
-		-- 大部分语言注释节点都叫 comment / line_comment / block_comment
+
+		-- 大部分语言注释节点都叫comment/line_comment/block_comment
+		-- 这里找有子串comment的节点当成注释
 		if t:find("comment") then
 			return true
 		end
+
+		-- 出现任何问题在nvim中使用测试获取名字(lang改为语言,row,col从下标0开始,对应到文本行列):
+		-- lua parser=vim.treesitter.get_parser(0,"lang")
+		-- =parser.parse(parser)[1]:root():descendant_for_range(row,col,row,col):type()
+
 		node = node:parent()
 	end
 	return false
@@ -146,19 +125,20 @@ end
 local function filter_diags(diags, bufnr)
 	local out = {}
 	for _, d in ipairs(diags) do
+
+		--不管end只管start
 		local r = d.range.start
 
-		-- 防止上面函数意外抛错
-		local ok, yes = pcall(in_comment, bufnr, r.line, r.character)
+		local ok, is_comment = pcall(in_comment, bufnr, r.line, r.character)
 
-		-- 不是注释才保留
-		if not (ok and yes) then
+		if not (ok and is_comment) then
 			table.insert(out, d)
 		end
 	end
 
 	return out
 end
+
 
 
 return {
@@ -174,16 +154,39 @@ return {
 			vim.lsp.enable(k)
 		end
 
-		-- handler LSP注释诊断处理
-		local orig = vim.lsp.handlers["textDocument/publishDiagnostics"]
+		-- 修改vim.lsp.handlers["textDocument/publishDiagnostics"]不进行注释诊断处理
+		local origin = vim.lsp.handlers["textDocument/publishDiagnostics"]
 
 		vim.lsp.handlers["textDocument/publishDiagnostics"] =
 		function(err, result, ctx, config)
+			--[[
+			-- 测试使用，dfs递归遍历表
+			local function show_tree(t)
+				if (type(t) ~= "table") then return end
+
+				for k,v in pairs(t) do
+					print(k,"\t\t", v)
+					if (type(v) == "table") then
+						print("^^^^^^^^^")
+						show_tree(v)
+						print("$$$$$$$$$\n\n")
+					end
+				end
+			end
+
+			for k,v in pairs(result.diagnostics) do
+				print("#",k,"\t\t", v)
+				show_tree(v)
+				print("\n\n")
+			end
+			]]
+
 			if result and result.diagnostics then
 				local bufnr = vim.uri_to_bufnr(result.uri)
 				result.diagnostics = filter_diags(result.diagnostics, bufnr)
 			end
-			return orig(err, result, ctx, config)
+
+			return origin(err, result, ctx, config)
 		end
 
 	end,
@@ -193,9 +196,5 @@ return {
 	-- 懒加载
 	lazy = true
 }
-
-
-
-
 
 

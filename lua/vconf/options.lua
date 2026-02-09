@@ -1,6 +1,6 @@
 ---@diagnostic disable: undefined-global
 
-vim.opt.mouse = ""              --禁止鼠标,"a"在所有下启动
+vim.opt.mouse = ""              --不禁止鼠标,"a"在所有下禁止
 
 vim.opt.clipboard = "unnamedplus" --剪切板
 
@@ -21,11 +21,14 @@ vim.opt.tabstop = 4             -- Tab宽度
 vim.opt.shiftwidth = 4          -- tab转变宽度
 vim.opt.softtabstop = 4         -- Tab插入删除的列长
 
--- `indentexpr`通常为缩进源
+-- `indentexpr`为缩进源, 交给lsp去设置
 -- {visual}=在`indentexpr`无设置时使用内部函数
 vim.cmd([[filetype on]])         -- filetype
 vim.cmd([[filetype plugin off]]) -- filetype插件
 vim.cmd([[filetype indent off]]) -- filetype缩进
+
+-- 在输入时不要用indentexpr缩进
+vim.opt.indentkeys=""
 
 vim.opt.cindent     = false     -- 智能c缩进
 vim.opt.smartindent = false     -- 智能缩进

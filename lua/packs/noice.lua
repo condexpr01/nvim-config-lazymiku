@@ -2,7 +2,7 @@
 return {
 
 	-- `noice`对`make cmake`等终端信息的显示不是很好
-	enabled = false,
+	enabled = true,
 
 	"folke/noice.nvim",
 

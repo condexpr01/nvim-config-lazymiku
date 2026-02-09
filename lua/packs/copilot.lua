@@ -4,7 +4,6 @@ return {
 	"zbirenbaum/copilot.lua",
 
 	requires = {
-		-- (optional) for NES functionality
 		"copilotlsp-nvim/copilot-lsp",
 	},
 
@@ -13,7 +12,7 @@ return {
 	event = "VeryLazy",
 
 	opts = {
-		--
+
 		panel = {
 			enabled = true,
 

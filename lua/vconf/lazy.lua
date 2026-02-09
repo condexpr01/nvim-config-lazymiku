@@ -58,8 +58,8 @@ local opts= {
 				--`"tarPlugin"`,
 				--`"zipPlugin"`,
 				--`"matchparen"`,
+				--"matchit",
 				"netrwPlugin",
-				"matchit",
 				"tohtml",
 				"tutor"
 			}

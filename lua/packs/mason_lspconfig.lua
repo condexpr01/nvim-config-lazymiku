@@ -17,7 +17,6 @@ return {
 			"pylsp",
 			"jsonls",
 			"yamlls",
-			--"copilot",
 		},
 
 		automatic_enable =true

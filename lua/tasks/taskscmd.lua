@@ -3,8 +3,9 @@
 --alpha启动界面快速加载工作
 
 local function load_mode()
-	vim.cmd("e " .. "$MYVIMRC")
-	--`vim.cmd("e " .. "")`
+	--vim.cmd("e " .. "$MYVIMRC")
+	--vim.cmd("e " .. "")
+	vim.cmd("e " .. "~/Desktop/workdir/op.cpp")
 
 end
 

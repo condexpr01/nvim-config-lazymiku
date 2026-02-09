@@ -8,7 +8,7 @@ return {
 	build = ":TSUpdate",
 	opts = {
 		-- `LazyVim` config for `treesitter`
-		indent =    { enable = true },
+		indent =    { enable = true},
 		highlight = { enable = true },
 		folds =     { enable = true },
 
@@ -36,9 +36,6 @@ return {
 	--事件懒加载
 	event = "VeryLazy"
 }
-
-
-
 
 
 

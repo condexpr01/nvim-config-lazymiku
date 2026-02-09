@@ -1,8 +1,8 @@
 ---@diagnostic disable: undefined-global
 
--- 导航
+-- 文件导航功能
 
--- Disable `netrw` at the very start of your init.lua
+-- Disable `netrw` at the very start of init.lua
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
@@ -71,15 +71,6 @@ return {
 	--懒加载
 	lazy = true
 }
-
-
-
-
-
-
-
-
-
 
 
 
