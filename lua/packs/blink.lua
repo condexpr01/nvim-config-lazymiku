@@ -100,7 +100,7 @@ local function opts()
 		signature ={enabled=true},
 
 		sources = {
-			default = { 'lsp','path','snippets','buffer','copilot' },
+			default = { 'lsp','path','snippets','buffer','tags','copilot' },
 			providers = {
 				lsp = {
 					name = 'LSP',
@@ -124,6 +124,12 @@ local function opts()
 					score_offset = 100,
 					async = true,
 				},
+
+				tags = {
+					name = "tags",
+					module = "blink.compat.source",
+				},
+
 			},
 		},
 
@@ -153,6 +159,9 @@ return {
 		"mason-org/mason-lspconfig.nvim",
 		"L3MON4D3/LuaSnip",
 		"giuxtaposition/blink-cmp-copilot",
+
+        "saghen/blink.compat",
+        "quangnguyen30192/cmp-nvim-tags",
 	},
 
 	opts = opts(),
