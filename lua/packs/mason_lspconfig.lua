@@ -8,7 +8,7 @@ return {
 
 		ensure_installed ={
 			"harper_ls",
-			"clangd",
+			--"clangd",
 			"lua_ls",
 			"vimls",
 			"bashls",
