@@ -85,13 +85,11 @@ return {
 			if is_big==1 then return end
 
 			if (vim.fn.line2byte(vim.fn.line("$")+1) > 1.5 * 1024 * 1024) then
-				vim.schedule(
-					function()
+				vim.schedule(function()
 						exec_bigfile_autocmds()
 						vim.notify(" Bigfile optimizations have been applied !",
 							vim.log.levels.INFO)
-					end
-				)
+					end)
 			end
 		end
 

@@ -1,7 +1,7 @@
+---@diagnostic disable: undefined-global
 
 return {
 
-	-- `noice`对`make cmake`等终端信息的显示不是很好
 	enabled = true,
 
 	"folke/noice.nvim",
@@ -10,15 +10,43 @@ return {
 
 	dependencies = {
 		"MunifTanjim/nui.nvim",
-		"rcarriga/nvim-notify", -- 可选，更好看的通知
+		--"rcarriga/nvim-notify",
 	},
 
-	opts = {},
+	opts = {
 
-	keys = {
-		--查看新消息,或刷新
-		{'<leader>n','<cmd>NoiceAll<CR>',  'n', { noremap = true }},
+		cmdline = { enabled = true},
+		notify = { enabled = false},
+		messages = { enabled = false},
+		popupmenu = { enabled = false},
+		lsp = {
+			override = {
+				["vim.lsp.util.convert_input_to_markdown_lines"] = false,
+				["vim.lsp.util.stylize_markdown"] = false,
+			},
+
+			message = {enabled = false,},
+			progress = {enabled = false,},
+			throttle = 100/30,
+		},
+
+		throttle=1000/30,
+
+		health={
+			checker=true,
+		},
+
+		presets = {
+			command_palette = true,
+			inc_rename = true,
+			bottom_search = false,
+			long_message_to_split = false,
+			lsp_doc_border = false,
+		},
+
 	},
+
 }
+
 
 
