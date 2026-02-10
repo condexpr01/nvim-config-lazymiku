@@ -4,9 +4,8 @@ vim.opt.mouse = ""              --不禁止鼠标,"a"在所有下禁止
 
 vim.opt.clipboard = "unnamedplus" --剪切板
 
-if vim.opt.guifont then
-	vim.opt.guifont = "Hack, Sarasa UI SC:h13"
-end
+--vim.opt.guifont = "Hack Nerd Font:h13:b, Sarasa UI SC:h13:b"
+vim.opt.guifont = "Hack Nerd Font:h13:b"
 
 vim.opt.number = true           -- 行号
 vim.opt.relativenumber = false  -- 相对行号

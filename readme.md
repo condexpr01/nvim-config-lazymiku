@@ -16,14 +16,15 @@ nvim-config-lazymiku-install <target-dir>
 [keybindings nvim_lspconfig.lua](#nvim_lspconfiglua)
 [keybindings nvim_tree.lua](#nvim_treelua)
 [keybindings telescope.lua](#telescopelua)
-[keybindings notice.lua](#noticelua)
+[keybindings nvim_notify.lua](#nvim_notifylua)
 
 # fonts
 
 ## options.lua
 
 ```lua
-vim.opt.guifont = "Hack, Sarasa UI SC:h13"
+--vim.opt.guifont = "Hack Nerd Font:h13:b, Sarasa UI SC:h13:b"
+vim.opt.guifont = "Hack Nerd Font:h13:b"
 ```
 
 # key bindings
@@ -280,7 +281,7 @@ keys = {
 ```
 
 
-## notice.lua
+## nvim_notify.lua
 
 | 按键 | 功能 |
 |------|------|
@@ -292,7 +293,7 @@ enable=false,
 
 keys = {
 	--查看新消息,或刷新
-	{'<leader>n','<cmd>NoiceAll<CR>',  'n', { noremap = true }},
+	{'<leader>n','<cmd>Notifications<CR>',  'n', { noremap = true }},
 },
 ```
 
