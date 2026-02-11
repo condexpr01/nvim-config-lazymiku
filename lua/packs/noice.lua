@@ -32,9 +32,9 @@ return {
 
 		throttle=1000/30,
 
-		health={
-			checker=true,
-		},
+		log=false,
+		debug=false,
+		health={checker=false,},
 
 		presets = {
 			command_palette = true,
