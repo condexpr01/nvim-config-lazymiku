@@ -54,11 +54,11 @@ local opts= {
 		rtp = {
 			--禁用自带插件
 			disabled_plugins = {
-				--`"gzip"`,
-				--`"tarPlugin"`,
-				--`"zipPlugin"`,
-				--`"matchparen"`,
-				--"matchit",
+				"gzip",
+				"tarPlugin",
+				"zipPlugin",
+				"matchparen",
+				"matchit",
 				"netrwPlugin",
 				"tohtml",
 				"tutor"

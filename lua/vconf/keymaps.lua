@@ -71,9 +71,9 @@ vim.opt.matchpairs:append({
 	-- synxtax pairs and same char pairs
 	-- use vim-matchup plugin to support these
 	-- as different char can be matchpairs
-
-	--"':'",
-	--'":"',
+	-- the fllowing pairs are not supported by default
+	"':'",
+	'":"',
 })
 
 
