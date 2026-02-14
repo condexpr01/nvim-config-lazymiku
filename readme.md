@@ -17,6 +17,7 @@ nvim-config-lazymiku-install <target-dir>
 [keybindings nvim_tree.lua](#nvim_treelua)
 [keybindings telescope.lua](#telescopelua)
 [keybindings nvim_notify.lua](#nvim_notifylua)
+[keybindings aerial.lua](#aeriallua)
 
 # fonts
 
@@ -298,5 +299,15 @@ keys = {
 ```
 
 
+## aerial.lua
 
+| 按键 | 功能 |
+|------|------|
+| `;t` | 帮助定位类成员的侧边栏 |
+
+```lua
+keys={
+	{ "<leader>t", "<cmd>AerialToggle!<CR>", desc = "Toggle Aerial" },
+},
+```
 
