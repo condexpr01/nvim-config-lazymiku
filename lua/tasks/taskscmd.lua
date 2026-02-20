@@ -5,7 +5,7 @@
 local function load_mode()
 	--vim.cmd("e " .. "$MYVIMRC")
 	--vim.cmd("e " .. "")
-	vim.cmd("e " .. "~/Desktop/workdir/op.cpp")
+	vim.cmd("e " .. "~/Desktop/wubi86dir/dict.txt")
 
 end
 

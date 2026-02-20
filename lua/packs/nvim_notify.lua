@@ -15,10 +15,8 @@ local function autocmds(notifymod,asyncmod)
 		vim.api.nvim_create_autocmd(event, {
 			nested=true,
 			callback =function()
-				vim.schedule(function()
-					async.run(function()
-						notify(content,"info",{ title = topic, timeout=750}).events.close()
-					end)
+				async.run(function()
+					notify(content,"info",{ title = topic, timeout=750})
 				end)
 			end
 		})
@@ -28,13 +26,11 @@ local function autocmds(notifymod,asyncmod)
 	vim.api.nvim_create_autocmd("BufWritePost", {
 		nested=true,
 		callback =function(ev)
-			vim.schedule(function()
-				async.run(function()
-					local filename = vim.fn.fnamemodify(ev.file, ":t")
-					local size = vim.fn.getfsize(ev.file)
-					notify(string.format("Saved(%s): %s",format_size(size),filename),"info",
-						{ title = "欢唱，以我之名！闪耀时刻！"}).events.close()
-				end)
+			async.run(function()
+				local filename = vim.fn.fnamemodify(ev.file, ":t")
+				local size = vim.fn.getfsize(ev.file)
+				notify(string.format("Saved(%s): %s",format_size(size),filename),"info",
+					{ title = "欢唱，以我之名！闪耀时刻！"})
 			end)
 		end
 	})
