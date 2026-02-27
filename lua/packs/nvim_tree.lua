@@ -2,6 +2,18 @@
 
 -- 文件导航功能
 
+local function ep(what,func,...)
+	local ok,result = pcall(func,...)
+
+	if not ok then
+		print("Error:",tostring(what));
+		return nil
+	end
+
+	return result;
+end
+
+
 -- Disable `netrw` at the very start of init.lua
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
@@ -11,15 +23,18 @@ vim.opt.termguicolors = true
 
 -- on_attach function
 local function nvim_tree_on_attach(bufnr)
-	local api = require "nvim-tree.api"
 
 	local function opts(desc)
-		return {desc="nvim-tree: ".. desc,
+		return {
+		desc="nvim-tree: ".. desc,
 		buffer = bufnr,
 		noremap = true,
 		silent = true,
 		nowait = true }
 	end
+
+	local api = ep("[nvim_tree] api",require,"nvim-tree.api")
+	if not api then return end
 
 	-- default mappings
 	api.config.mappings.default_on_attach(bufnr)
@@ -27,7 +42,7 @@ local function nvim_tree_on_attach(bufnr)
 	-- help
 	--'<Tab>',api.node.open.preview()
 	--'<CR>' ,api.node.open.edit()
-	vim.keymap.set('n', '?'    ,api.tree.toggle_help    ,opts('help'))
+	vim.keymap.set('n', '?',api.tree.toggle_help          ,opts('help'))
 
 	-- 上层目录下层目录的切换
 	vim.keymap.set('n', '-',api.tree.change_root_to_parent,opts('cd ..'))

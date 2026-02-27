@@ -1,5 +1,7 @@
 ---@diagnostic disable: undefined-global
 
+-- #warning#: no exception handling, handle when require
+
 vim.opt.mouse = ""              --不禁止鼠标,"a"在所有下禁止
 
 vim.opt.clipboard = "unnamedplus" --剪切板

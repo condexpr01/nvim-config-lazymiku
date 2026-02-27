@@ -1,8 +1,8 @@
 ---@diagnostic disable: undefined-global
 
+-- #warning#: no exception handling, handle when require
 
 -- 需在packs/core_config中启用
-
 -- 参数0:当前namespace
 -- `fg/bg/ctermfg/ctermbg/bold/italic/underline`
 

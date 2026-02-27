@@ -1,18 +1,29 @@
 ---@diagnostic disable: undefined-global
 
+local function ep(what,func,...)
+	local ok,result = pcall(func,...)
+
+	if not ok then
+		print("Error:",tostring(what));
+		return nil
+	end
+
+	return result;
+end
+
 --alpha启动界面快速加载工作
 
 local function load_mode()
-	--vim.cmd("e " .. "$MYVIMRC")
 	--vim.cmd("e " .. "")
-	vim.cmd("e " .. "~/Desktop/wubi86dir/dict.txt")
+	ep("[taskscmd]open failed",vim.cmd,"e " .. "$MYVIMRC")
 
 end
 
 
-
 local function edit_mode()
-	vim.cmd("e " .. vim.fn.stdpath("config") .. "/lua/tasks/taskscmd.lua")
+	ep("[taskscmd]",vim.cmd,"e "
+		.. vim.fn.stdpath("config")
+		.. "/lua/tasks/taskscmd.lua")
 end
 
 

@@ -1,5 +1,7 @@
 ---@diagnostic disable: undefined-global
 
+-- #warning#: no exception handling, handle when require
+
 local state = {};
 
 -- 在 PATH 里查找
@@ -70,3 +72,4 @@ end
 
 
 return state
+

@@ -1,5 +1,16 @@
 ---@diagnostic disable: undefined-global
 
+local function ep(what,func,...)
+	local ok,result = pcall(func,...)
+
+	if not ok then
+		print("Error:",tostring(what));
+		return nil
+	end
+
+	return result;
+end
+
 -- `miku`
 return {
 	"goolord/alpha-nvim",
@@ -7,7 +18,9 @@ return {
 	event = "VimEnter",
 
 	opts = function()
-		local dashboard = require("alpha.themes.dashboard")
+		local dashboard = ep("[alpha_nvim] dashboard",require,"alpha.themes.dashboard")
+		if not dashboard then return {} end
+
 		local logo =
 [[⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⢄⢀⠀⡀⣠⣴⣾⣿⠿⠟⠛⠛⠛⠿⠿⠿⠽⠿⠿⠿⠿⠿⢶⣦⣄⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⡿⡵⣯⣾⣿⣿⠟⠉⢀⣤⠶⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠙⠿⣷⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
@@ -45,10 +58,10 @@ return {
 				type = "group",
 				val = {
 					dashboard.button("w", "⚡  "
-					.. " Load tasks","<cmd>lua require\"tasks/taskscmd\"(1)<cr>"),
+					.. " Load tasks",[[<cmd>lua pcall(require("tasks.taskscmd"),1)<cr>]]),
 
 					dashboard.button("e", "⚡  "
-					.. " Edit tasks","<cmd>lua require\"tasks/taskscmd\"(0)<cr>"),
+					.. " Edit tasks",[[<cmd>lua pcall(require("tasks.taskscmd"),0)<cr>"]]),
 				},
 				opts = {spacing = 0}
 			},
@@ -61,26 +74,26 @@ return {
 					dashboard.button("c", "⚡  " .. " CopilotChat","<cmd>CopilotChat<cr>"),
 
 					dashboard.button("b", "⚡  "
-					.. " Blinkcmp status","<cmd>lua require\"blink.cmp\"<cr>"
+					.. " Blinkcmp status","<cmd>lua pcall(require,\"blink.cmp\")<cr>"
 					.. "<cmd>BlinkCmp status<cr>"),
 
 					dashboard.button("h", "⚡  "
 					.. " Checkhealth","<cmd>checkhealth<cr>"),
 
 					dashboard.button("m", "⚡  "
-					.. " Mason","<cmd>lua require\"mason\"<cr>"
+					.. " Mason","<cmd>lua pcall(require,\"mason\")<cr>"
 					.. "<cmd>Mason<cr>"),
 
 					dashboard.button("n", "⚡  "
-					.. " Nvim config","<cmd>lua require(\"nvim-tree\")<cr>"
+					.. " Nvim config","<cmd>lua pcall(require,\"nvim-tree\")<cr>"
 					.. "<cmd>lua vim.cmd(\"NvimTreeToggle \".. vim.fn.stdpath(\"config\"))<cr>"),
 
 					dashboard.button("p", "⚡  "
-					.. " LspInfo","<cmd>lua require\"mason-lspconfig\"<cr>"
+					.. " LspInfo","<cmd>lua pcall(require,\"mason-lspconfig\")<cr>"
 					.. "<cmd>LspInfo<cr>"),
 
 					dashboard.button("t", "⚡  "
-					.. " TSModuleInfo","<cmd>lua require\"nvim-treesitter\"<cr>"
+					.. " TSModuleInfo","<cmd>lua pcall(require,\"nvim-treesitter\")<cr>"
 					.. "<cmd>TSInstallInfo<cr>"),
 
 				},
@@ -93,7 +106,7 @@ return {
 			button.opts.hl_shortcut = "AlphaShortcut"
 		end
 
-		vim.cmd("hi AlphaHeader guifg=#39C5BB")
+		ep("[alpha_nvim] cmd",vim.cmd,"hi AlphaHeader guifg=#39C5BB")
 
 		dashboard.section.header.opts.hl = "AlphaHeader"
 		dashboard.section.buttons.opts.hl = "AlphaButtons"
@@ -114,24 +127,34 @@ return {
 				once = true,
 				pattern = "AlphaReady",
 				callback = function()
-					require("lazy").show()
+					local epr = ep("[alpha_nvim] lazy",require,"lazy")
+					if epr then epr.show() end
+
 				end,
 			})
 		end
 
-		require("alpha").setup(dashboard.opts)
+		local epr = ep("[alpha_nvim] alpha",require,"alpha")
+		if epr then epr.setup(dashboard.opts) end
 
 		vim.api.nvim_create_autocmd("User", {
 			once = true,
 			pattern = "LazyVimStarted",
 			callback = function()
-				local stats = require("lazy").stats()
+
+
+				local stats
+
+				epr = ep("[alpha_nvim] lazy",require,"lazy")
+				if epr then stats = epr.stats() end
+
 				dashboard.section.footer.val = "⚡ Neovim loaded "
 				.. stats.loaded.. "/".. stats.count .. " plugins "
 				.. "in "  .. stats.startuptime .. "ms\n"
 				.. "⚡ Done: ".. stats.times.LazyDone .. "ms "
 				.. "⚡ Start: ".. stats.times.LazyStart .. "ms"
-				pcall(vim.cmd.AlphaRedraw)
+
+				ep("[alpha_nvim] AlphaRedraw",vim.cmd.AlphaRedraw)
 			end,
 		})
 

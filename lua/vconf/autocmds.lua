@@ -6,3 +6,4 @@
 -- `redir end`取消
 -- `vim.cmd("redir @\"")`
 
+-- #warning#: no exception handling, handle when require

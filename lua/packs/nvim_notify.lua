@@ -1,38 +1,42 @@
----@diagnostic disable: undefined-global
+---@diagnostic disable: undefined-global, unused-local
 
-local function autocmds(notifymod,asyncmod)
-	local notify = notifymod.async
-	local async = asyncmod
+local function ep(what,func,...)
+	local ok,result = pcall(func,...)
 
-	-- 函数：单位格式
-	local function format_size(bytes)
-		if bytes < 1024 then return bytes .. "B"
-		elseif bytes < 1024*1024 then return string.format("%.1fK", bytes/1024)
-		else return string.format("%.1fM", bytes/(1024*1024)) end
+	if not ok then
+		print("Error:",tostring(what));
+		return nil
 	end
+
+	return result;
+end
+
+local function format_size(bytes)
+	if bytes < 1024 then return bytes .. "B"
+	elseif bytes < 1024*1024 then return string.format("%.1fK", bytes/1024)
+	else return string.format("%.1fM", bytes/(1024*1024)) end
+end
+
+local function autocmds(notifymod)
+	local notify = notifymod
+
 
 	local function notify_template(event,content,topic)
 		vim.api.nvim_create_autocmd(event, {
-			nested=true,
-			callback =function()
-				async.run(function()
-					notify(content,"info",{ title = topic, timeout=750})
-				end)
-			end
+			callback =vim.schedule_wrap(function()
+				ep("[nvim_notify] autocmd",notify,content,"info",{ title = topic, timeout=839})
+			end)
 		})
 	end
 
 	-- 保存文件
 	vim.api.nvim_create_autocmd("BufWritePost", {
-		nested=true,
-		callback =function(ev)
-			async.run(function()
-				local filename = vim.fn.fnamemodify(ev.file, ":t")
-				local size = vim.fn.getfsize(ev.file)
-				notify(string.format("Saved(%s): %s",format_size(size),filename),"info",
-					{ title = "欢唱，以我之名！闪耀时刻！"})
-			end)
-		end
+		callback = vim.schedule_wrap(function(ev)
+			local filename = vim.fn.fnamemodify(ev.file, ":t")
+			local size = vim.fn.getfsize(ev.file)
+			ep("[nvim_notify] autocmd",notify,string.format("Saved(%s): %s",format_size(size),filename),"info",
+				{ title = "欢唱，以我之名！闪耀时刻！"})
+		end)
 	})
 
 	notify_template("TextYankPost","TextYank","往昔之影，奉我之命")
@@ -61,6 +65,7 @@ local function autocmds(notifymod,asyncmod)
 
 end
 
+
 return {
 	'rcarriga/nvim-notify',
 
@@ -71,20 +76,27 @@ return {
 	enabled=true,
 	event="VeryLazy",
 
-	opts={
+	opts = {
 		fps = 60,
-		render="compact",
+		render = "compact",
 		stages = "slide",
-		timeout = 0,
+		timeout = 1500,
 		top_down = true,
-	}
-,
+		max_width = 50,
+		max_height = 10,
+	},
 
 	config=function (_,opts)
-		local notify = require("notify")
+		local notify = ep("[nvim_notify] notify",require,"notify")
+		if not notify then return end
+
 		notify.setup(opts)
 		vim.notify = notify
-		autocmds(notify,require("plenary.async"))
+
+
+		vim.defer_fn(function()
+			ep("[nvim_notify] autocmds",autocmds,notify)
+		end, 100)
 	end,
 
 	keys = {
@@ -92,7 +104,4 @@ return {
 		{'<leader>n','<cmd>Notifications<CR>',  'n', { noremap = true }},
 	},
 }
-
-
-
 

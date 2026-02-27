@@ -3,7 +3,7 @@
 return {
 	"zbirenbaum/copilot.lua",
 
-	requires = {
+	dependencies = {
 		"copilotlsp-nvim/copilot-lsp",
 	},
 
@@ -58,11 +58,6 @@ return {
 		{'<leader>zj','<cmd>Copilot panel jump_next<CR>','n', { noremap = true }},
 		{'<leader>zk','<cmd>Copilot panel jump_prev<CR>','n', { noremap = true }},
 	},
-
-
-	config = function(_,opts)
-		require("copilot").setup(opts)
-	end,
 
 }
 

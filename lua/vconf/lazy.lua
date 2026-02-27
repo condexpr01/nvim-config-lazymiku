@@ -1,5 +1,6 @@
 ---@diagnostic disable: undefined-global
 
+-- #warning#: no exception handling, handle when require
 
 -- 克隆lazy包管理器:Lazy
 local function load_lazy(lazy_setup_table)
@@ -75,11 +76,6 @@ vim.opt.timeout=false
 
 -- lazy加载失败会return false,可处理
 load_lazy(opts)
-
-
-
-
-
 
 
 

@@ -49,34 +49,6 @@ local lsp_opts = {
 	},
 }
 
--- `clangd_config`根据平台选择自动生成配置文件
-local function clangd_config()
-	local uv = vim.loop
-	local path,yaml_config
-
-	--msys2
-	if jit.os == "Windows" then
-		path = uv.os_getenv("LOCALAPPDATA").."/clangd/config.yaml"
-		yaml_config =[[
-CompileFlags:
-  Add:
-    - --target=x86_64-w64-windows-gnu]]
-
-		-- 确保目录存在(必要时创建)
-		vim.fn.mkdir(vim.fn.fnamemodify(path, ":h"), "p")
-
-		-- 写入内容（保留换行）
-		local f = io.open(path, "w")
-		if f ~= nil then
-			f:write(yaml_config)
-			f:close()
-		end
-
-	end
-
-end
-
-
 
 -- 判断 (row, col) 是否落在注释节点里
 local function in_comment(bufnr, row, col)
@@ -147,7 +119,6 @@ return {
 	opts = lsp_opts,
 
 	config = function(_ ,opts)
-		clangd_config()
 
 		for k,v in pairs(opts) do
 			vim.lsp.config[k] = v

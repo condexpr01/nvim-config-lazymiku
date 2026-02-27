@@ -4,7 +4,7 @@
 --vim.cmd("map")
 
 
-
+-- #warning#: no exception handling, handle when require
 
 -- 跳转到tag定义和返回
 vim.keymap.set('n', 'tj', '<C-]>', { desc = 'Tag jump to'   })
@@ -75,18 +75,6 @@ vim.opt.matchpairs:append({
 	"':'",
 	'":"',
 })
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

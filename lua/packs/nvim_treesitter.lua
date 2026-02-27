@@ -1,3 +1,4 @@
+---@diagnostic disable: unused-local
 
 -- `:TSInstall <language_to_install>`
 
@@ -30,7 +31,7 @@ return {
 	},
 
 	config = function(this,opts)
-		require(this.name .. ".configs").setup(opts)
+		require("nvim-treesitter.configs").setup(opts)
 	end,
 
 	--事件懒加载
