@@ -28,9 +28,14 @@ prepare() {
 }
 
 package() {
-	pandoc -s -t man "$srcdir/readme.md" -o "$srcdir/readme.1"
-	gzip -9c "$srcdir/readme.1" > "$srcdir/${pkgname}.gz"
-	install -Dm644 "$srcdir/${pkgname}.gz" "$pkgdir${prefix}/share/man/man1/${pkgname}.1.gz"
+
+	if command -v pandoc 2>/dev/null >/dev/null ; then
+		pandoc -s -t man "$srcdir/readme.md" -o "$srcdir/readme.1"
+		gzip -9c "$srcdir/readme.1" > "$srcdir/${pkgname}.gz"
+		install -Dm644 "$srcdir/${pkgname}.gz" "$pkgdir${prefix}/share/man/man1/${pkgname}.1.gz"
+	else
+		echo "Warning: no pandoc, won't install mandoc"
+	fi
 
 	install -Dm644 "$srcdir/LICENSE.txt" "$pkgdir${prefix}/share/license/${pkgname}/LICENSE.txt"
 
