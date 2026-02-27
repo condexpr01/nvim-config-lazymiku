@@ -4,7 +4,7 @@ install_to() {
 
 	if [ -d "$1" ]; then
 		echo "Installing nvim-config-lazymiku to $1"
-		cp -r "${prefix}/share/nvim-config-lazymiku/*" "$1"
+		cp -r "${prefix}/share/nvim-config-lazymiku/"* "$1"
 	elif [ -n "$1" ]; then
 		echo "Error: $1 is not a directory"
 	else
