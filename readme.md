@@ -5,6 +5,23 @@ makepkg -si
 nvim-config-lazymiku-install <target-dir>
 ```
 
+# Install
+
+> if has trouble in networks, you can try to add the follow to you `hosts`
+> or use VPN
+
+```shell
+140.82.112.3 github.com
+151.101.1.194 github.global.ssl.fastly.net
+151.101.65.194 github.global.ssl.fastly.net
+151.101.129.194 github.global.ssl.fastly.net
+151.101.193.194 github.global.ssl.fastly.net
+185.199.108.153 assets-cdn.github.com
+185.199.109.153 assets-cdn.github.com
+185.199.110.153 assets-cdn.github.com
+185.199.111.153 assets-cdn.github.com
+```
+
 # Index
 [fonts options.lua](#optionslua)
 
