@@ -10,7 +10,7 @@ nvim-config-lazymiku-install <target-dir>
 > if has trouble in networks, you can try to add the follow to you `hosts`
 > or use VPN
 
-> btw, environment should exists like 'make' 'gcc' 'cargo' etc    
+> btw, environment should exists like 'make' 'gcc' 'cargo' 'nodejs' etc    
 > if using msys2, be care about this.
 
 
