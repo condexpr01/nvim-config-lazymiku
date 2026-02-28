@@ -19,6 +19,13 @@ return {
 
 	config = function()
 
+		if false then
+			local epr = ep("[core_config] git_ssh",require,"vconf.git_ssh")
+
+			ep("[core_config] git_ssh",epr,true)   --set git_ssh
+			--ep("[core_config] git_ssh",epr,false)  --unset git_ssh
+		end
+
 		--判断防止真终端中颜色问题
 		if (vim.fn.has("gui_running") == 1) then
 			-- cappuccino

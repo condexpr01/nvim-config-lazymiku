@@ -12,9 +12,6 @@ local function load_lazy(lazy_setup_table)
 	-- 如果没有就克隆 
 	if not (vim.uv or vim.loop).fs_stat(lazy_path) then
 
-		--git用`ssh`代替路径
-		--require("vconf.git_ssh")(true)
-
 		-- git clone
 		vim.fn.system({
 			"git","clone",

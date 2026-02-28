@@ -1,6 +1,17 @@
----@diagnostic disable: unused-local
+---@diagnostic disable: unused-local, undefined-global
 
 -- `:TSInstall <language_to_install>`
+
+local function ep(what,func,...)
+	local ok,result = pcall(func,...)
+
+	if not ok then
+		print("Error:",tostring(what));
+		return nil
+	end
+
+	return result;
+end
 
 -- `nvim-treesitter pasers`
 return {
@@ -31,7 +42,29 @@ return {
 	},
 
 	config = function(this,opts)
-		require("nvim-treesitter.configs").setup(opts)
+		local utils = ep("[nvim_treesitter] utils",require,"nvim-treesitter.utils")
+
+		ep("[nvim_treesitter] join_path",function()
+			if utils then
+				local origin_join_path = utils.join_path;
+				utils.join_path = function(...)
+					local result = origin_join_path(...)
+
+					--filter
+					if vim.fn.has("win32") and result then
+						result = result:gsub('\\','/')
+					end
+
+					return result
+				end
+
+			end
+		end)
+
+		local epr = ep("[nvim_treesitter] configs",require,"nvim-treesitter.configs")
+		if epr then epr.setup(opts)
+		else return end
+
 	end,
 
 	--事件懒加载

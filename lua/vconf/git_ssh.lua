@@ -6,7 +6,7 @@
 -- #warning#: no exception handling, handle when require
 
 return function(is_used)
-	if is_used == true then
+	if is_used then
 		vim.fn.system({
 			"git","config","--global",
 			[[url.git@github.com:.insteadof]],
