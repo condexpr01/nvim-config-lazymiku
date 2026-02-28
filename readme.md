@@ -5,10 +5,14 @@ makepkg -si
 nvim-config-lazymiku-install <target-dir>
 ```
 
-# Install
+# Network and env
 
 > if has trouble in networks, you can try to add the follow to you `hosts`
 > or use VPN
+
+> btw, environment should exists like 'make' 'gcc' 'cargo' etc    
+> if using msys2, be care about this.
+
 
 ```shell
 140.82.112.3 github.com
