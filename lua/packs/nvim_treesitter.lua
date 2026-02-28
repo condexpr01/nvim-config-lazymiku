@@ -18,7 +18,9 @@ return {
 	"nvim-treesitter/nvim-treesitter",
 	branch = 'master',
 	build = ":silent! TSUpdate",
-	lazy = false,
+
+	event = "VeryLazy",
+
 	opts = {
 		-- `LazyVim` config for `treesitter`
 		indent =    { enable = true},
