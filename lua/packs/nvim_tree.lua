@@ -55,12 +55,9 @@ end
 return {
 	"nvim-tree/nvim-tree.lua",
 
-	version = "*",
-
 	dependencies = {
 		"nvim-tree/nvim-web-devicons",
 	},
-
 
 	opts ={
 		--大小写敏感,宽度

@@ -17,12 +17,16 @@ end
 return {
 	"nvim-treesitter/nvim-treesitter",
 	branch = 'master',
-	build = ":TSUpdate",
+	build = ":silent! TSUpdate",
+	lazy = false,
 	opts = {
 		-- `LazyVim` config for `treesitter`
 		indent =    { enable = true},
 		highlight = { enable = true },
 		folds =     { enable = true },
+
+		auto_install = false,
+		sync_install = false,
 
 		ensure_installed = {
 			"ebnf","regex",
@@ -67,8 +71,6 @@ return {
 
 	end,
 
-	--事件懒加载
-	event = "VeryLazy"
 }
 
 

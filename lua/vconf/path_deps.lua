@@ -30,7 +30,9 @@ local function find_executable(name)
     return nil
 end
 
-if jit.os == "Windows" then
+
+-- default disable
+if false and jit.os == "Windows" then
 
 	-- windows需要外部用`winapi`改变透明度,依赖`setalpha`(自定义的)
 	if find_executable("setalpha.exe") or find_executable("setalpha") then
@@ -38,25 +40,22 @@ if jit.os == "Windows" then
 	end
 
 	-- 令`msys2`上有好的shell体验
-	if false then
-		local shell = find_executable("zsh.exe")
-		if not shell then shell = find_executable("zsh") end
-		if shell then
-			vim.opt.shell = shell
-			vim.opt.shellcmdflag ="-c"
+	local shell = find_executable("zsh.exe")
+	if not shell then shell = find_executable("zsh") end
+	if shell then
+		vim.opt.shell = shell
+		vim.opt.shellcmdflag ="-c"
 
-			vim.opt.shellquote=""
-			vim.opt.shellxquote=""
-			vim.opt.shellxescape =""
+		vim.opt.shellquote=""
+		vim.opt.shellxquote=""
+		vim.opt.shellxescape =""
 
-			vim.opt.shellpipe = [[2>&1|tee "%s"]]
-			vim.opt.shellredir= [[>"%s" 2>&1]]
+		vim.opt.shellpipe = [[2>&1|tee "%s"]]
+		vim.opt.shellredir= [[>"%s" 2>&1]]
 
-			vim.opt.shelltemp= false
-			vim.opt.shellslash= true
-		end
+		vim.opt.shelltemp= false
+		vim.opt.shellslash= true
 	end
-
 
 -- Linux上KDE plasma可以在设置中加入透明度
 -- `elseif jit.os == "Linux" then`

@@ -7,7 +7,7 @@ return {
 		"copilotlsp-nvim/copilot-lsp",
 	},
 
-	cmd = "Copilot",
+	cmd = "Copilot auth",
 
 	event = "VeryLazy",
 

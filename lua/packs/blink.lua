@@ -152,8 +152,10 @@ return {
 	'saghen/blink.cmp',
 
 	version = '1.*',
-	build = 'cargo build --release',
-	-- build = 'nix run .#build-plugin',
+
+	build = 'CARGO_FEATURE_PURE=1 cargo build --release',
+	--build = 'cargo build --release',
+	--build = 'nix run .#build-plugin',
 
 	dependencies = {
 		"mason-org/mason-lspconfig.nvim",
@@ -168,9 +170,6 @@ return {
 
 	opts_extend = { "sources.default" }
 }
-
-
-
 
 
 
