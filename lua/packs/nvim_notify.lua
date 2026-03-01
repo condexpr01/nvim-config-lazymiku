@@ -47,10 +47,11 @@ local function autocmds(notifymod)
 			local filename = vim.fn.fnamemodify(ev.file, ":t")
 			local size = vim.fn.getfsize(ev.file)
 
-			if type(vim.g.notify_resources) == "number" and vim.g.notify_resources > 0 then
+			local res = vim.g.notify_resources
+			if res and res > 0 then
 				ep("[nvim_notify] autocmd",notify,string.format("Saved(%s): %s",format_size(size),filename),"info",
 					{ title = "欢唱，以我之名！闪耀时刻！"})
-				vim.g.notify_resources = notify_resources - 1
+				vim.g.notify_resources = res - 1
 			else
 				ep("[nvim_notify] autocmd",vim.notify,
 					string.format("Saved(%s): %s",format_size(size),filename),
