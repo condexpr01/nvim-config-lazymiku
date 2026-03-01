@@ -14,7 +14,7 @@ return {
 			"bashls",
 			"cmake",
 			"pyright",
-			"pylsp",
+			--"pylsp",
 			"jsonls",
 			"yamlls",
 		},
@@ -36,3 +36,4 @@ return {
 	--事件懒加载
 	lazy = true
 }
+
