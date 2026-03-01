@@ -3,6 +3,7 @@ local function ep(what,func,...)
 	local ok,result = pcall(func,...)
 
 	if not ok then
+		-- seperate with vim.notify, using print
 		print("Error:",tostring(what));
 		return nil
 	end

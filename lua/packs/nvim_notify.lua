@@ -20,11 +20,23 @@ end
 local function autocmds(notifymod)
 	local notify = notifymod
 
+	-- 10 notify resoures per second
+	vim.g.notify_resources = 0;
+	vim.fn.timer_start(1000,function()
+
+		vim.g.notify_resources = 10
+	end,{["repeat"] = -1})
 
 	local function notify_template(event,content,topic)
 		vim.api.nvim_create_autocmd(event, {
 			callback =vim.schedule_wrap(function()
-				ep("[nvim_notify] autocmd",notify,content,"info",{ title = topic, timeout=839})
+				local res = vim.g.notify_resources
+				if res and res > 0 then
+					ep("[nvim_notify] autocmd",notify,content,"info",{ title = topic, timeout=839})
+					vim.g.notify_resources = res - 1
+				else
+					ep("[nvim_notify] autocmd",vim.notify,content,vim.log.levels.TRACE)
+				end
 			end)
 		})
 	end
@@ -34,8 +46,16 @@ local function autocmds(notifymod)
 		callback = vim.schedule_wrap(function(ev)
 			local filename = vim.fn.fnamemodify(ev.file, ":t")
 			local size = vim.fn.getfsize(ev.file)
-			ep("[nvim_notify] autocmd",notify,string.format("Saved(%s): %s",format_size(size),filename),"info",
-				{ title = "欢唱，以我之名！闪耀时刻！"})
+
+			if type(vim.g.notify_resources) == "number" and vim.g.notify_resources > 0 then
+				ep("[nvim_notify] autocmd",notify,string.format("Saved(%s): %s",format_size(size),filename),"info",
+					{ title = "欢唱，以我之名！闪耀时刻！"})
+				vim.g.notify_resources = notify_resources - 1
+			else
+				ep("[nvim_notify] autocmd",vim.notify,
+					string.format("Saved(%s): %s",format_size(size),filename),
+					vim.log.levels.TRACE)
+			end
 		end)
 	})
 
