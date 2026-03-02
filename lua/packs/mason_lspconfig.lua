@@ -6,20 +6,19 @@ return {
 
 	opts = {
 
+		automatic_enable =true,
 		ensure_installed ={
-			"harper_ls",
 			--"clangd",
+			"harper_ls",
 			"lua_ls",
 			"vimls",
 			"bashls",
 			"cmake",
 			"pyright",
-			--"pylsp",
 			"jsonls",
 			"yamlls",
 		},
 
-		automatic_enable =true
 	},
 
 	dependencies = {

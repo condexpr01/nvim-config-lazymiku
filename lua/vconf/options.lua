@@ -85,10 +85,3 @@ vim.opt.splitbelow = false      -- 分隔时向下
 vim.opt.splitright = false      -- 分隔时向右
 
 
-
-
-
-
-
-
-

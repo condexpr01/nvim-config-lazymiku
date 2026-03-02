@@ -16,8 +16,7 @@ end
 -- `nvim-treesitter pasers`
 return {
 	"nvim-treesitter/nvim-treesitter",
-	branch = 'master',
-	build = ":silent! TSUpdate",
+	build = ":TSUpdate",
 
 	event = "VeryLazy",
 
@@ -27,9 +26,12 @@ return {
 		highlight = { enable = true },
 		folds =     { enable = true },
 
-		auto_install = false,
+		auto_install = true,
 		sync_install = false,
 
+		ensure_installed = {},
+
+		--[[
 		ensure_installed = {
 			"ebnf","regex",
 			"markdown","markdown_inline",
@@ -44,37 +46,25 @@ return {
 			"printf","query","diff",
 			"javascript","jsdoc",
 			"toml","tsx","typescript","xml"
-		},
+		},]]
+
 	},
 
 	config = function(this,opts)
-		local utils = ep("[nvim_treesitter] utils",require,"nvim-treesitter.utils")
-
-		ep("[nvim_treesitter] join_path",function()
-			if utils then
-				local origin_join_path = utils.join_path;
-				utils.join_path = function(...)
-					local result = origin_join_path(...)
-
-					--filter
-					if vim.fn.has("win32") and result then
-						result = result:gsub('\\','/')
-					end
-
-					return result
-				end
-
-			end
-		end)
-
 		local epr = ep("[nvim_treesitter] configs",require,"nvim-treesitter.configs")
 		if epr then epr.setup(opts)
 		else return end
 
+		if true and jit.os == "Windows" then
+			epr = ep("[nvim_treesitter] install",require,"nvim-treesitter.install")
+			if epr then
+				epr.compilers ={"cl","zig","gcc","clang","cc","c++","g++","clang++"}
+			else return end
+		end
+
 	end,
 
 }
-
 
 
 
