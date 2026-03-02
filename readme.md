@@ -26,6 +26,10 @@ nvim-config-lazymiku-install <target-dir>
 185.199.111.153 assets-cdn.github.com
 ```
 
+# Preview
+![preview](./preview.png)
+
+
 # Index
 [fonts options.lua](#optionslua)
 
