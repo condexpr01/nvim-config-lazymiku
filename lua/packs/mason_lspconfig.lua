@@ -13,7 +13,7 @@ return {
 			"lua_ls",
 			"vimls",
 			"bashls",
-			"cmake",
+			"neocmake",
 			"pyright",
 			"jsonls",
 			"yamlls",
