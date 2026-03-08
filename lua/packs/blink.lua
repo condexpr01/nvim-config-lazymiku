@@ -24,6 +24,9 @@ local keymap={
 	['<C-b>']     = { 'scroll_documentation_up', 'fallback' },
 	['<C-f>']     = { 'scroll_documentation_down', 'fallback' },
 
+	['<C-u>'] = { 'scroll_signature_up', 'fallback' },
+	['<C-d>'] = { 'scroll_signature_down', 'fallback' },
+
 	--函数签名
 	['<C-k>'] = { 'show_signature', 'hide_signature', 'fallback' },
 }
@@ -151,7 +154,7 @@ return {
 
 	'saghen/blink.cmp',
 
-	version = '1.*',
+	--version = '1.*',
 
 	build = 'CARGO_FEATURE_PURE=1 cargo build --release',
 	--build = 'cargo build --release',
