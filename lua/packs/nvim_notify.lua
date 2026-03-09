@@ -24,7 +24,7 @@ local function autocmds(notifymod)
 	vim.g.notify_resources = 0;
 	vim.fn.timer_start(1000,function()
 
-		vim.g.notify_resources = 7
+		vim.g.notify_resources = 5
 	end,{["repeat"] = -1})
 
 	local function notify_template(event,content,topic)
