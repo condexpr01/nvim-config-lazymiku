@@ -42,6 +42,7 @@ local lsp_opts = {
 		cmd = {
 			"clangd",
 			"--background-index",
+			"--header-insertion=never",
 			"--clang-tidy",
 			"--enable-config",
 		},
