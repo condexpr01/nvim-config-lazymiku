@@ -68,7 +68,10 @@ return {
 		renderer = {group_empty = false},
 
 		--过滤不显示
-		filters =  {dotfiles = false},
+		filters =  {
+			dotfiles = false,
+			git_ignored = false,
+		},
 
 		on_attach = nvim_tree_on_attach
 	},
