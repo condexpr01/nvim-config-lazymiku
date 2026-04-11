@@ -1,3 +1,4 @@
+#!/bin/sh
 
 install_to() {
 	local prefix=${PREFIX:-/usr}
