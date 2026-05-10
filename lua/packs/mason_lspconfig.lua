@@ -8,7 +8,7 @@ return {
 
 		automatic_enable =true,
 		ensure_installed ={
-			--"clangd",
+			"clangd",
 			"harper_ls",
 			"lua_ls",
 			"vimls",
@@ -17,6 +17,7 @@ return {
 			"pyright",
 			"jsonls",
 			"yamlls",
+			"opengl",
 		},
 
 	},

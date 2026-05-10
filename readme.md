@@ -5,6 +5,14 @@ makepkg -si
 nvim-config-lazymiku-install <target-dir>
 ```
 
+# pin version
+```
+neovim 0.11.*
+tree-sitter 0.25.*
+
+reason: tree-sitter
+```
+
 # Network and env
 
 > if has trouble in networks, you can try to add the follow to you `hosts`

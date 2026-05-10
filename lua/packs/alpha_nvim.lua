@@ -77,9 +77,6 @@ return {
 					.. " Blinkcmp status","<cmd>lua pcall(require,\"blink.cmp\")<cr>"
 					.. "<cmd>BlinkCmp status<cr>"),
 
-					dashboard.button("h", "⚡  "
-					.. " Checkhealth","<cmd>checkhealth<cr>"),
-
 					dashboard.button("m", "⚡  "
 					.. " Mason","<cmd>lua pcall(require,\"mason\")<cr>"
 					.. "<cmd>Mason<cr>"),
@@ -88,13 +85,14 @@ return {
 					.. " Nvim config","<cmd>lua pcall(require,\"nvim-tree\")<cr>"
 					.. "<cmd>lua vim.cmd(\"NvimTreeToggle \".. vim.fn.stdpath(\"config\"))<cr>"),
 
+					dashboard.button("h", "⚡  "
+					.. " checkhealth","<cmd>checkhealth<cr>"),
+
 					dashboard.button("p", "⚡  "
-					.. " LspInfo","<cmd>lua pcall(require,\"mason-lspconfig\")<cr>"
-					.. "<cmd>LspInfo<cr>"),
+					.. " checkhealth vim.lsp","<cmd>checkhealth vim.lsp<cr>"),
 
 					dashboard.button("t", "⚡  "
-					.. " TSModuleInfo","<cmd>lua pcall(require,\"nvim-treesitter\")<cr>"
-					.. "<cmd>TSInstallInfo<cr>"),
+					.. " checkhealth vim.treesitter","<cmd>checkhealth vim.treesitter<cr>"),
 
 				},
 				opts = {spacing = 0}

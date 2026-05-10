@@ -154,19 +154,21 @@ return {
 
 	'saghen/blink.cmp',
 
-	--version = '1.*',
+	version = '1.*',
 
 	build = 'CARGO_FEATURE_PURE=1 cargo build --release',
 	--build = 'cargo build --release',
 	--build = 'nix run .#build-plugin',
 
 	dependencies = {
+		'saghen/blink.lib',
+
 		"mason-org/mason-lspconfig.nvim",
 		"L3MON4D3/LuaSnip",
 		"giuxtaposition/blink-cmp-copilot",
 
-        "saghen/blink.compat",
-        "quangnguyen30192/cmp-nvim-tags",
+		"saghen/blink.compat",
+		"quangnguyen30192/cmp-nvim-tags",
 	},
 
 	opts = opts(),
