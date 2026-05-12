@@ -17,7 +17,7 @@ return {
 			"pyright",
 			"jsonls",
 			"yamlls",
-			"opengl",
+			"glsl_analyzer",
 		},
 
 	},

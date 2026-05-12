@@ -105,6 +105,7 @@ local function opts()
 		sources = {
 			default = { 'lsp','path','snippets','buffer','tags','copilot' },
 			providers = {
+
 				lsp = {
 					name = 'LSP',
 					module = 'blink.cmp.sources.lsp',
@@ -117,14 +118,14 @@ local function opts()
 					max_items = nil,
 					min_keyword_length = 0,
 					fallbacks = {},
-					score_offset = 100,
+					score_offset = 1000,
 					override = nil,
 				},
 
 				copilot = {
 					name = "copilot",
 					module = "blink-cmp-copilot",
-					score_offset = 88,
+					score_offset = 1,
 					async = true,
 				},
 
