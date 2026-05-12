@@ -117,14 +117,14 @@ local function opts()
 					max_items = nil,
 					min_keyword_length = 0,
 					fallbacks = {},
-					score_offset = 0,
+					score_offset = 100,
 					override = nil,
 				},
 
 				copilot = {
 					name = "copilot",
 					module = "blink-cmp-copilot",
-					score_offset = 100,
+					score_offset = 88,
 					async = true,
 				},
 
