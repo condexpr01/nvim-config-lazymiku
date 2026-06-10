@@ -1,3 +1,9 @@
+---@diagnostic disable: undefined-global
+
+if vim.g.neovide then
+	vim.g.neovide_fullscreen=true
+	vim.g.neovide_opacity=0.8
+end
 
 local function ep(what,func,...)
 	local ok,result = pcall(func,...)
