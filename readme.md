@@ -2,15 +2,13 @@
 
 ```shell
 makepkg -si
-nvim-config-lazymiku-install <target-dir>
+nvim-config-lazymiku-install [<target-dir>]
 ```
 
-# pin version
+# version
 ```
-neovim 0.11.*
-tree-sitter 0.25.*
-
-reason: tree-sitter
+neovim 0.12.*
+tree-sitter 0.26.*
 ```
 
 # Network and env
@@ -18,9 +16,8 @@ reason: tree-sitter
 > if has trouble in networks, you can try to add the follow to you `hosts`
 > or use VPN
 
-> btw, environment should exists like 'make' 'gcc' 'cargo' 'nodejs' etc    
-> if using msys2, be care about this.
-
+> BTW, environment should exists like 'make' 'gcc' 'cargo' 'nodejs' etc    
+> if using msys2, be care about this.    
 
 ```shell
 140.82.112.3 github.com

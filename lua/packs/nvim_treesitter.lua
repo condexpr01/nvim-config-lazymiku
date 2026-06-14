@@ -17,6 +17,7 @@ end
 return {
 	"nvim-treesitter/nvim-treesitter",
 	build = ":TSUpdate",
+	branch = "main",
 
 	event = "VeryLazy",
 

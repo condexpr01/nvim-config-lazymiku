@@ -2,12 +2,7 @@
 
 if jit.os == "Windows" then
 
-	if vim.fn.exepath("setalpha") then
-		-- windows用外部`winapi`改变透明度,依赖`setalpha`(自定义的)
-		-- Linux上KDE plasma可以在系统设置中加入窗口透明度规则,
-		os.execute("setalpha 211")
-	end
-
+	--zsh
 	local shell = vim.fn.exepath("zsh")
 	if shell then
 		vim.opt.shell = shell
