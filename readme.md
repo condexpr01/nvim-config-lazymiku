@@ -31,7 +31,7 @@ tree-sitter 0.26.*
 185.199.111.153 assets-cdn.github.com
 ```
 
-# Preview
+# Preview(on neovide)
 ![preview](./preview.png)
 
 

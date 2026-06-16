@@ -52,12 +52,11 @@ return {
 	},
 
 	config = function(this,opts)
-		local epr = ep("[nvim_treesitter] config",require,"nvim-treesitter.config")
+		local epr = ep("[nvim_treesitter] nvim-treesitter",require,"nvim-treesitter")
 		if epr then epr.setup(opts)
 		else return end
 
 		if true and jit.os == "Windows" then
-			epr = ep("[nvim_treesitter] install",require,"nvim-treesitter.install")
 			if epr then
 				epr.compilers ={"cl","zig","gcc","clang","cc","c++","g++","clang++"}
 			else return end
