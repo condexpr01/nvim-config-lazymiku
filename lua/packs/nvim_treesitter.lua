@@ -52,7 +52,7 @@ return {
 	},
 
 	config = function(this,opts)
-		local epr = ep("[nvim_treesitter] configs",require,"nvim-treesitter.configs")
+		local epr = ep("[nvim_treesitter] config",require,"nvim-treesitter.config")
 		if epr then epr.setup(opts)
 		else return end
 
