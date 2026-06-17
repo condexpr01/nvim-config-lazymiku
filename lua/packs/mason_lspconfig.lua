@@ -8,7 +8,9 @@ return {
 
 		automatic_enable =true,
 		ensure_installed ={
+			-- if uncomment, ensure it has same version as your clang++
 			--"clangd",
+			"ast_grep",
 			"harper_ls",
 			"lua_ls",
 			"vimls",
