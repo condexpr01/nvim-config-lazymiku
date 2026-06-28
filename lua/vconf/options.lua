@@ -25,8 +25,8 @@ vim.opt.softtabstop = 4         -- Tab插入删除的列长
 -- `indentexpr`为缩进源, 交给lsp去设置
 -- {visual}=在`indentexpr`无设置时使用内部函数
 vim.cmd([[filetype on]])         -- filetype
-vim.cmd([[filetype plugin off]]) -- filetype插件
-vim.cmd([[filetype indent off]]) -- filetype缩进
+vim.cmd([[filetype plugin on]]) -- filetype插件
+vim.cmd([[filetype indent on]])  -- filetype缩进
 
 -- 在输入时不要用indentexpr缩进
 vim.opt.indentkeys=""

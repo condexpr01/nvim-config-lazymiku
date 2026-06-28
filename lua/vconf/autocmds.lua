@@ -1,3 +1,4 @@
+---@diagnostic disable: undefined-global
 
 
 -- message显示消息
@@ -7,3 +8,11 @@
 -- `vim.cmd("redir @\"")`
 
 -- #warning#: no exception handling, handle when require
+
+-- force no indentkeys
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "*",
+    callback = function()
+        vim.opt_local.indentkeys = ""
+    end,
+})
