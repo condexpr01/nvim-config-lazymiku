@@ -1,4 +1,4 @@
----@diagnostic disable: undefined-global, unused-local
+---@diagnostic disable: undefined-global, unused-local, unused-function
 
 local function ep(what,func,...)
 	local ok,result = pcall(func,...)

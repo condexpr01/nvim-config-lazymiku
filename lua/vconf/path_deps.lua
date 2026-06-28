@@ -26,7 +26,7 @@ end
 -- 当前目录(%:h)下调用`ctags`生成tags
 if vim.fn.exepath("ctags") then
 	vim.api.nvim_create_user_command("CtagsGen", function()
-	  vim.cmd([[!ctags -R --c-kinds=+p --fields=+iaS --extras=+q --exclude=\* --exclude-exception=\*.h %:h]])
+		vim.cmd([[!ctags -R --c-kinds=+p --fields=+iaS --extras=+q --exclude=\* --exclude-exception=\*.h %:h]])
 	end, { desc = "Generate tags by using ctags" })
 
 end

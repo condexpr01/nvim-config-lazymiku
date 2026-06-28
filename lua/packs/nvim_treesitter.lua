@@ -62,6 +62,16 @@ return {
 			else return end
 		end
 
+		if opts.indent and opts.indent.enable then
+			vim.api.nvim_create_autocmd('FileType', {
+				pattern = "*",
+				callback = function()
+					vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+				end,
+			})
+		end
+
+
 	end,
 
 }
