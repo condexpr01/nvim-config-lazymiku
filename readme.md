@@ -329,15 +329,15 @@ keys = {
 ```
 
 
-## aerial.lua
+## outline.lua
 
 | 按键 | 功能 |
 |------|------|
 | `;t` | 帮助定位类成员的侧边栏 |
 
 ```lua
-keys={
-	{ "<leader>t", "<cmd>AerialToggle!<CR>", desc = "Toggle Aerial" },
-},
+keys = {
+	{ "<leader>t", "<cmd>Outline<CR>", desc = "Toggle outline" },
+}
 ```
 
