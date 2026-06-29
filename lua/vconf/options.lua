@@ -32,6 +32,7 @@ vim.cmd([[filetype indent on]])  -- filetype缩进
 vim.opt.indentkeys=""
 
 vim.opt.cindent     = false     -- 智能c缩进
+vim.opt.cinkeys     = ""        -- 智能c缩进
 vim.opt.smartindent = false     -- 智能缩进
 vim.opt.autoindent  = true      -- 使用上个非空白符的缩进换行
 vim.opt.formatoptions = ""      -- filetype关闭下,不让`autoindent`格式化,
