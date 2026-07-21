@@ -65,12 +65,16 @@ return {
 		view =     {width = 30},
 
 		--简化空文件夹显示
-		renderer = {group_empty = false},
+		renderer = {
+			group_empty = false,
+			symlink_destination = true,
+		},
 
 		--过滤不显示
 		filters =  {
 			dotfiles = false,
 			git_ignored = false,
+			custom = {}
 		},
 
 		on_attach = nvim_tree_on_attach
