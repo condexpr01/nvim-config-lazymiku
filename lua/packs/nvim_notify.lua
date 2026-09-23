@@ -62,19 +62,18 @@ local function autocmds(notifymod)
 
 	notify_template("TextYankPost","TextYank","往昔之影，奉我之命")
 
-	notify_template("FileChangedShell","FileChanged","原灵现世")
+	notify_template("FileChangedShell","FileChanged","天动万象")
 
-	notify_template("VimSuspend","VimSuspend","星辰，为我降下")
-	notify_template("VimResume","VimResume","极寒，任我驱使")
+	notify_template("CompleteDone", "CompleteDone", "噔噔！")
+	notify_template("BufModifiedSet", "BufModifiedSet", "让世界热闹起来！")
 
-	notify_template("BufModifiedSet", "BufModifiedSet", "让世界热闹起来吧！")
-	notify_template("BufDelete", "BufDelete", "化作浮沫吧")
+	notify_template("VimSuspend","VimSuspend","此刻，寂灭之时！")
+	notify_template("VimResume","VimResume","泡影看破！")
+	notify_template("BufDelete", "BufDelete", "无念，断绝！")
 
 	notify_template("CmdlineEnter", "CmdlineEnter", "律令")
+
 	notify_template("CmdlineLeave", "CmdlineLeave", "命运，在此显现")
-
-	notify_template("CompleteDone", "CompleteDone", "此乃天道")
-
 
 	notify_template("FocusGained", "FocusGained", "向着(星辰)与深渊")
 	notify_template("FocusLost", "FocusLost", "向着星辰与(深渊)")
