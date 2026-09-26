@@ -34,6 +34,7 @@ return {
 		M.fn.load_wav("givelight", vim.fn.stdpath('config') .. '/wav/givelight.wav')
 		M.fn.load_wav("magic-start", vim.fn.stdpath('config') .. '/wav/magic-start.wav')
 		M.fn.load_wav("ice", vim.fn.stdpath('config') .. '/wav/ice.wav')
+		M.fn.load_wav("aaa", vim.fn.stdpath('config') .. '/wav/aaa.wav')
 
 		--timer for call resources
 		vim.g.audio_play_resources = 0;
@@ -65,15 +66,15 @@ return {
 
 		--binding
 		audio_template("BufWritePost","happytime")
-		audio_template("TextYankPost","listened-cmd")
+		audio_template("TextYankPost","world")
 		audio_template("FileChangedShell","change")
-		audio_template("CompleteDone","dd")
-		audio_template("BufModifiedSet","world")
-		audio_template("VimSuspend","breakshadow")
-		audio_template("VimResume","silence")
+		audio_template("CompleteDone","showtime")
+		audio_template("BufModifiedSet","aaa")
+		audio_template("VimSuspend","silence")
+		audio_template("VimResume","breakshadow")
 		audio_template("BufDelete","noemo")
 		audio_template("CmdlineEnter","command")
-		audio_template("CmdlineLeave","showtime")
+		audio_template("CmdlineLeave","dd")
 		audio_template("RecordingEnter","givelight")
 		audio_template("RecordingLeave","magic-start")
 		audio_template("SwapExists","ice")

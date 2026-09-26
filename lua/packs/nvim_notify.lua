@@ -59,12 +59,12 @@ local function autocmds(notifymod)
 		end)
 	})
 
-	notify_template("TextYankPost","TextYank","往昔之影，奉我之命")
+	notify_template("TextYankPost","TextYank","让世界热闹起来！")
 
 	notify_template("FileChangedShell","FileChanged","天动万象")
 
-	notify_template("CompleteDone", "CompleteDone", "噔噔！")
-	notify_template("BufModifiedSet", "BufModifiedSet", "让世界热闹起来！")
+	notify_template("CompleteDone", "CompleteDone", "闪耀时刻！")
+	notify_template("BufModifiedSet", "BufModifiedSet", "miku da yo")
 
 	notify_template("VimSuspend","VimSuspend","此刻，寂灭之时！")
 	notify_template("VimResume","VimResume","泡影看破！")
@@ -72,7 +72,7 @@ local function autocmds(notifymod)
 
 	notify_template("CmdlineEnter", "CmdlineEnter", "律令")
 
-	notify_template("CmdlineLeave", "CmdlineLeave", "闪耀时刻！")
+	notify_template("CmdlineLeave", "CmdlineLeave", "噔噔！")
 
 	notify_template("FocusGained", "FocusGained", "向着(星辰)与深渊")
 	notify_template("FocusLost", "FocusLost", "向着星辰与(深渊)")
