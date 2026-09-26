@@ -31,8 +31,8 @@ local function autocmds(notifymod)
 			callback =vim.schedule_wrap(function()
 				local res = vim.g.notify_resources
 				if res and res > 0 then
-					ep("[nvim_notify] autocmd",notify,content,"info",{ title = topic, timeout=839})
 					vim.g.notify_resources = res - 1
+					ep("[nvim_notify] autocmd",notify,content,"info",{ title = topic, timeout=839})
 				else
 					ep("[nvim_notify] autocmd",vim.notify,content,vim.log.levels.TRACE)
 				end
@@ -61,26 +61,27 @@ local function autocmds(notifymod)
 
 	notify_template("TextYankPost","TextYank","让世界热闹起来！")
 
-	notify_template("FileChangedShell","FileChanged","天动万象")
+	notify_template("FileChangedShell","FileChangedShell","天动万象")
 
-	notify_template("CompleteDone", "CompleteDone", "闪耀时刻！")
-	notify_template("BufModifiedSet", "BufModifiedSet", "miku da yo")
+	notify_template("InsertEnter","InsertEnter","闪耀时刻！")
+	notify_template("InsertLeave","InsertLeave","命运，在此显现！")
 
-	notify_template("VimSuspend","VimSuspend","此刻，寂灭之时！")
-	notify_template("VimResume","VimResume","泡影看破！")
-	notify_template("BufDelete", "BufDelete", "无念，断绝！")
 
 	notify_template("CmdlineEnter", "CmdlineEnter", "律令")
-
 	notify_template("CmdlineLeave", "CmdlineLeave", "噔噔！")
 
-	notify_template("FocusGained", "FocusGained", "向着(星辰)与深渊")
-	notify_template("FocusLost", "FocusLost", "向着星辰与(深渊)")
+	notify_template("BufDelete", "BufDelete", "请看这边！")
+	notify_template("BufModifiedSet", "BufModifiedSet", "miku da yo aaa~")
+
+	notify_template("CompleteDone", "CompleteDone", "审判！")
+
+	notify_template("FocusGained", "FocusGained", "我得集中精神！")
+	notify_template("FocusLost", "FocusLost", "向着星辰与深渊")
 
 	notify_template("RecordingEnter", "Recording", "来点灯光")
 	notify_template("RecordingLeave", "Recorded", "魔术开场")
 
-	notify_template("SwapExists", "Swap Exists", "坚冰，断绝深仇")
+	notify_template("SwapExists", "Swap Exists", "泡影看破！")
 
 end
 
