@@ -18,4 +18,5 @@ return function(is_used)
 			[[url.git@github.com:.insteadof]]
 		})
 	end
+
 end

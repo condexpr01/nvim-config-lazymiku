@@ -82,9 +82,9 @@ return {
 
 	keys = {
 		--显示切换
-		{'<leader>e',':NvimTreeToggle<CR>',  'n', { noremap = true }},
+		{'<leader>e','<cmd>NvimTreeToggle<CR>',  'n', { noremap = true }},
 		--切换到当前目录
-		{'<leader>E',':NvimTreeOpen %:h<CR>','n', { noremap = true }}
+		{'<leader>E','<cmd>NvimTreeOpen %:h<CR>','n', { noremap = true }}
 	},
 
 	--懒加载

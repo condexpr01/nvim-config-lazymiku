@@ -20,10 +20,9 @@ end
 local function autocmds(notifymod)
 	local notify = notifymod
 
-	-- 10 notify resoures per second
+	-- 5 notify resoures per second
 	vim.g.notify_resources = 0;
 	vim.fn.timer_start(1000,function()
-
 		vim.g.notify_resources = 5
 	end,{["repeat"] = -1})
 
@@ -50,7 +49,7 @@ local function autocmds(notifymod)
 			local res = vim.g.notify_resources
 			if res and res > 0 then
 				ep("[nvim_notify] autocmd",notify,string.format("Saved(%s): %s",format_size(size),filename),"info",
-					{ title = "欢唱，以我之名！闪耀时刻！"})
+					{ title = "欢唱，以我之名！"})
 				vim.g.notify_resources = res - 1
 			else
 				ep("[nvim_notify] autocmd",vim.notify,
@@ -73,7 +72,7 @@ local function autocmds(notifymod)
 
 	notify_template("CmdlineEnter", "CmdlineEnter", "律令")
 
-	notify_template("CmdlineLeave", "CmdlineLeave", "命运，在此显现")
+	notify_template("CmdlineLeave", "CmdlineLeave", "闪耀时刻！")
 
 	notify_template("FocusGained", "FocusGained", "向着(星辰)与深渊")
 	notify_template("FocusLost", "FocusLost", "向着星辰与(深渊)")
