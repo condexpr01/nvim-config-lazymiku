@@ -21,7 +21,7 @@ return {
 
 		-- load audio api(M.fn.*)
 		local ok, M = pcall(require,'nvim-audio')
-		if not ok and not M.fn then
+		if not ok or not M.fn then
 			vim.notify("FAILED: require nvim-audio")
 			return
 		end
