@@ -1,11 +1,20 @@
 # Install
 
+* pacman
+
 ```shell
 makepkg -si
 nvim-config-lazymiku-install [<target-dir>]
 ```
 
+* clone
+```shell
+git clone --depth=1 https://github.com/condexpr01/nvim-config-lazymiku <nvim-config-dir>
+git clone --depth=1 git@github.com:condexpr01/nvim-config-lazymiku <nvim-config-dir>
+```
+
 # version
+
 ```
 neovim 0.12.*
 tree-sitter 0.26.*
@@ -319,9 +328,6 @@ keys = {
 | `;n` | 查看新消息/刷新 |
 
 ```lua
---不好用，对于nvim上使用终端看不到什么输出
-enable=false,
-
 keys = {
 	--查看新消息,或刷新
 	{'<leader>n','<cmd>Notifications<CR>',  'n', { noremap = true }},
