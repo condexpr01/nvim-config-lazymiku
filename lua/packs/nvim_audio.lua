@@ -10,18 +10,26 @@ return {
 	event = "VeryLazy",
 
 	opts = {
+		-- volume gain
 		volume=1.0,
+
+		-- try call fn.ra_bind()
 		bind_when_setup = true
 	},
 
 	config = function (main, opts)
-		local M = require('nvim-audio')
+
+		-- load audio api(M.fn.*)
+		local ok, M = pcall(require,'nvim-audio')
+		if not ok and not M.fn then
+			vim.notify("FAILED: require nvim-audio")
+			return
+		end
+
 		M.setup(opts)
 
 		--register wav(requires: 44100sample, 2channel, pixels-fmt: SDL_AUDIO_F32(float))
 		M.fn.load_wav("__tick", main.dir .. '/wav/tick.wav')
-
-
 		M.fn.load_wav("aaa", vim.fn.stdpath('config') .. '/wav/aaa.wav')
 		M.fn.load_wav("breakshadow", vim.fn.stdpath('config') .. '/wav/breakshadow.wav')
 		M.fn.load_wav("change", vim.fn.stdpath('config') .. '/wav/change.wav')
@@ -115,3 +123,4 @@ return {
 	end
 
 }
+

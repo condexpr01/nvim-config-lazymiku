@@ -25,6 +25,7 @@ prepare() {
 	cp $startdir/init.lua $srcdir/init.lua
 	cp -r $startdir/lua $srcdir/lua
 	cp -r $startdir/luasnippets $srcdir/luasnippets
+	cp -r $startdir/wav $srcdir/wav
 }
 
 package() {
@@ -44,6 +45,7 @@ package() {
 	install -Dm644 "$srcdir/init.lua" "$pkgdir${prefix}/share/nvim-config-lazymiku/init.lua"
 	cp -r "$srcdir/lua" "$pkgdir${prefix}/share/nvim-config-lazymiku/lua"
 	cp -r "$srcdir/luasnippets" "$pkgdir${prefix}/share/nvim-config-lazymiku/luasnippets"
+	cp -r "$srcdir/wav" "$pkgdir${prefix}/share/nvim-config-lazymiku/wav"
 
 }
 
