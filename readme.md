@@ -214,7 +214,7 @@ keys = {
 | `C-k`     | 签名signature|
 
 ```lua
---键位,无选tab space流
+--键位: 无选tab space流
 local keymap={
 	-- 'none' disable the 'default' preset
 	preset = 'none',
@@ -285,19 +285,19 @@ local lsp_keys = {
 }
 ```
 
-## nvim_tree.lua
+## neo_tree.lua
 
 | 按键 | 功能 |
 |------|------|
-| `;e` | 切换NvimTree显示 |
-| `;E` | 打开当前文件所在目录的NvimTree |
+| `;e` | 切换Neotree显示 |
+| `;E` | 打开当前文件所在目录 |
 
 ```lua
 keys = {
 	--显示切换
-	{'<leader>e',':NvimTreeToggle<CR>',  'n', { noremap = true }},
+	{'<leader>e','<cmd>Neotree toggle<CR>', 'n', { noremap = true }},
 	--切换到当前目录
-	{'<leader>E',':NvimTreeOpen %:h<CR>','n', { noremap = true }}
+	{'<leader>E','<cmd>Neotree %:h<CR>',    'n', { noremap = true }}
 },
 ```
 
