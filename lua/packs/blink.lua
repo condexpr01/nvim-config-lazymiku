@@ -60,12 +60,12 @@ local completion = {
 		draw = {
 			columns = {
 				{ "label", "label_description", gap = 1 },
-				{ "kind_icon", "kind", "source_name" }
+				{ "kind", "source_name","kind_icon" }
 			},
 		}
 	},
 
-	ghost_text={enabled=true},
+	ghost_text={enabled=false},
 }
 
 local cmdline_completion = {
@@ -78,26 +78,25 @@ local cmdline_completion = {
 		draw = {
 			columns = {
 				{ "label", "label_description", gap = 1 },
-				{ "kind_icon", "kind", "source_name" }
+				{ "kind", "source_name","kind_icon" }
 			},
 		}
 	},
 
-	ghost_text={enabled=true},
+	ghost_text={enabled=false},
 }
 
 
 local function opts()
 
 	return {
-		appearance = {nerd_font_variant = 'Nerd Font'},
 		snippets={preset = 'luasnip'},
 
 		keymap = keymap,
-		completion=completion,
+		completion= completion,
 
 		-- 高性能模糊查找优先
-		fuzzy = { implementation = "prefer_rust_with_warning" },
+		fuzzy = { implementation = "rust" },
 
 		--启用签名
 		signature ={enabled=true},
@@ -141,7 +140,7 @@ local function opts()
 			enabled=true,
 			keymap = keymap,
 			completion = cmdline_completion,
-			sources = {'cmdline','path','buffer'}
+			sources = { default = {'cmdline','path','buffer'}}
 		},
 
 	}
@@ -150,16 +149,11 @@ end
 
 
 return {
-	enabled=true,
+	enabled = function()return not vim.tbl_contains({ "lua", "markdown" }, vim.bo.filetype)end,
+
 	event="VeryLazy",
 
 	'saghen/blink.cmp',
-
-	version = '1.*',
-
-	build = 'CARGO_FEATURE_PURE=1 cargo build --release',
-	--build = 'cargo build --release',
-	--build = 'nix run .#build-plugin',
 
 	dependencies = {
 		'saghen/blink.lib',
@@ -171,6 +165,15 @@ return {
 		"saghen/blink.compat",
 		"quangnguyen30192/cmp-nvim-tags",
 	},
+
+	build = function()
+		local ok, bc = pcall(require,'blink.cmp')
+		if ok and bc and bc.build then
+			bc.build():pwait()
+		else
+			vim.notify("FAILED: blink-cmp build")
+		end
+	end,
 
 	opts = opts(),
 

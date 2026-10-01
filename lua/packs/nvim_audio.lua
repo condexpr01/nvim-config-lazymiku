@@ -3,6 +3,8 @@
 return {
 	"condexpr01/nvim-audio.nvim",
 
+	enabled = true,
+
 	build = function (plugin)
 		vim.cmd("make -C " .. plugin.dir)
 	end,
@@ -20,8 +22,8 @@ return {
 	config = function (main, opts)
 
 		-- load audio api(M.fn.*)
-		local ok, M = pcall(require,'nvim-audio')
-		if not ok or not M.fn then
+		local fn_ok, M = pcall(require,'nvim-audio')
+		if not fn_ok or not M.fn then
 			vim.notify("FAILED: require nvim-audio")
 			return
 		end

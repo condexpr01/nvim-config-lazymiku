@@ -82,8 +82,8 @@ return {
 					.. "<cmd>Mason<cr>"),
 
 					dashboard.button("n", "⚡  "
-					.. " Nvim config","<cmd>lua pcall(require,\"nvim-tree\")<cr>"
-					.. "<cmd>lua vim.cmd(\"NvimTreeToggle \".. vim.fn.stdpath(\"config\"))<cr>"),
+					.. " Nvim config","<cmd>lua pcall(require,\"neo-tree\")<cr>"
+					.. "<cmd>lua vim.cmd(\"Neotree \".. vim.fn.stdpath(\"config\"))<cr>"),
 
 					dashboard.button("h", "⚡  "
 					.. " checkhealth","<cmd>checkhealth<cr>"),
