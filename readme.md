@@ -51,7 +51,7 @@ tree-sitter 0.26.*
 [keybindings keymaps.lua](#keymapslua)
 [keybindings bufferline.lua](#bufferlinelua)
 [keybindings copilot.lua](#copilotlua)
-[keybindings blink_cmp.lua](#blink_cmplua)
+[keybindings cmp-.lua](#cmp-lua)
 [keybindings nvim_lspconfig.lua](#nvim_lspconfiglua)
 [keybindings nvim_tree.lua](#nvim_treelua)
 [keybindings telescope.lua](#telescopelua)
@@ -198,7 +198,11 @@ keys = {
 ```
 
 
-## blink_cmp.lua
+## cmp-.lua
+
+> cmp-blink-cmp.lua/cmp-nvim-cmp.lua    
+> default: cmp-nvim-cmp.lua    
+> change engine: edit var: vim.g.cmp_engine in init.lua    
 
 | 按键 | 功能 |
 |------|------|
@@ -211,10 +215,10 @@ keys = {
 | `C-b` | 文档向上滚动 |
 | `C-space` | 打开补全 |
 | `C-e`     | 关闭补全 |
-| `C-k`     | 签名signature|
 
 ```lua
 --键位: 无选tab space流
+--这里显示的是blink.cmp的配置键位，nvim-cmp的配置键位也等价于此
 local keymap={
 	-- 'none' disable the 'default' preset
 	preset = 'none',
@@ -237,9 +241,6 @@ local keymap={
 	--文档滚动
 	['<C-b>']     = { 'scroll_documentation_up', 'fallback' },
 	['<C-f>']     = { 'scroll_documentation_down', 'fallback' },
-
-	--函数签名
-	['<C-k>'] = { 'show_signature', 'hide_signature', 'fallback' },
 }
 ```
 

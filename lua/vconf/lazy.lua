@@ -64,6 +64,10 @@ local opts= {
 		}
 	},
 
+	git = {
+		timeout = 86400
+	},
+
 	lazy = false
 }
 

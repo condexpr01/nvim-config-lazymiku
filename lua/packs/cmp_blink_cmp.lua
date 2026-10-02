@@ -23,12 +23,6 @@ local keymap={
 	--文档滚动
 	['<C-b>']     = { 'scroll_documentation_up', 'fallback' },
 	['<C-f>']     = { 'scroll_documentation_down', 'fallback' },
-
-	['<C-u>'] = { 'scroll_signature_up', 'fallback' },
-	['<C-d>'] = { 'scroll_signature_down', 'fallback' },
-
-	--函数签名
-	['<C-k>'] = { 'show_signature', 'hide_signature', 'fallback' },
 }
 
 local completion = {
@@ -62,7 +56,10 @@ local completion = {
 				{ "label", "label_description", gap = 1 },
 				{ "kind", "source_name","kind_icon" }
 			},
-		}
+		},
+
+		max_height = 13,
+
 	},
 
 	ghost_text={enabled=false},
@@ -80,7 +77,9 @@ local cmdline_completion = {
 				{ "label", "label_description", gap = 1 },
 				{ "kind", "source_name","kind_icon" }
 			},
-		}
+		},
+
+		max_height = 13,
 	},
 
 	ghost_text={enabled=false},
@@ -95,10 +94,8 @@ local function opts()
 		keymap = keymap,
 		completion= completion,
 
-		-- 高性能模糊查找优先
 		fuzzy = { implementation = "rust" },
 
-		--启用签名
 		signature ={enabled=true},
 
 		sources = {
@@ -149,7 +146,13 @@ end
 
 
 return {
-	enabled = function()return not vim.tbl_contains({ "lua", "markdown" }, vim.bo.filetype)end,
+	enabled = function()
+		if vim.g.cmp_engine ~= "blink.cmp" then
+			return false
+		end
+
+		return not vim.tbl_contains({ "lua", "markdown" }, vim.bo.filetype)
+	end,
 
 	event="VeryLazy",
 

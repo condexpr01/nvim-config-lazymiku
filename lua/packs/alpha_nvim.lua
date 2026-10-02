@@ -52,16 +52,28 @@ return {
 
 		dashboard.section.header.val = vim.split(logo, "\n")
 
+		local cmp_status_button = function()
+			if vim.g.cmp_engine == 'nvim-cmp' then
+				return dashboard.button("s", "⚡  ".. " CmpStatus(nvim-cmp detected)","<cmd>CmpStatus<cr>")
+			elseif vim.g.cmp_engine == "blink.cmp" then
+				return dashboard.button("s", "⚡  ".. " Blinkcmp status(blink.cmp detected)","<cmd>BlinkCmp status<cr>")
+			end
+		end
+
 		-- `stylua: ignore`
 		dashboard.section.buttons.val = {
 			{
 				type = "group",
 				val = {
-					dashboard.button("w", "⚡  "
-					.. " Load tasks",[[<cmd>lua pcall(require("tasks.taskscmd"),1)<cr>]]),
-
 					dashboard.button("e", "⚡  "
-					.. " Edit tasks",[[<cmd>lua pcall(require("tasks.taskscmd"),0)<cr>"]]),
+					.. " Neo-tree toggle(keys: `;e`)","<cmd>lua pcall(require,\"neo-tree\")<cr>"
+					.. "<cmd>lua vim.cmd(\"Neotree toggle\")<cr>"),
+
+					dashboard.button("w", "⚡  "
+					.. " Load tasks work",[[<cmd>lua pcall(require("tasks.taskscmd"),1)<cr>]]),
+
+					dashboard.button("f", "⚡  "
+					.. " Edit tasks file",[[<cmd>lua pcall(require("tasks.taskscmd"),0)<cr>"]]),
 				},
 				opts = {spacing = 0}
 			},
@@ -73,9 +85,7 @@ return {
 
 					dashboard.button("c", "⚡  " .. " CopilotChat","<cmd>CopilotChat<cr>"),
 
-					dashboard.button("b", "⚡  "
-					.. " Blinkcmp status","<cmd>lua pcall(require,\"blink.cmp\")<cr>"
-					.. "<cmd>BlinkCmp status<cr>"),
+					cmp_status_button(),
 
 					dashboard.button("m", "⚡  "
 					.. " Mason","<cmd>lua pcall(require,\"mason\")<cr>"
@@ -85,14 +95,9 @@ return {
 					.. " Nvim config","<cmd>lua pcall(require,\"neo-tree\")<cr>"
 					.. "<cmd>lua vim.cmd(\"Neotree \".. vim.fn.stdpath(\"config\"))<cr>"),
 
-					dashboard.button("h", "⚡  "
-					.. " checkhealth","<cmd>checkhealth<cr>"),
-
-					dashboard.button("p", "⚡  "
-					.. " checkhealth vim.lsp","<cmd>checkhealth vim.lsp<cr>"),
-
-					dashboard.button("t", "⚡  "
-					.. " checkhealth vim.treesitter","<cmd>checkhealth vim.treesitter<cr>"),
+					dashboard.button("h", "⚡  " .. " checkhealth","<cmd>checkhealth<cr>"),
+					dashboard.button("p", "⚡  " .. " checkhealth vim.lsp","<cmd>checkhealth vim.lsp<cr>"),
+					dashboard.button("t", "⚡  " .. " checkhealth vim.treesitter","<cmd>checkhealth vim.treesitter<cr>"),
 
 				},
 				opts = {spacing = 0}
