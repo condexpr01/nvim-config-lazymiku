@@ -49,7 +49,7 @@ local function autocmds(notifymod)
 			local res = vim.g.notify_resources
 			if res and res > 0 then
 				ep("[nvim_notify] autocmd",notify,string.format("Saved(%s): %s",format_size(size),filename),"info",
-					{ title = "欢唱，以我之名！"})
+					{ title = "让世界热闹起来！"})
 				vim.g.notify_resources = res - 1
 			else
 				ep("[nvim_notify] autocmd",vim.notify,
@@ -59,21 +59,18 @@ local function autocmds(notifymod)
 		end)
 	})
 
-	notify_template("TextYankPost","TextYank","让世界热闹起来！")
+	notify_template("TextYankPost","TextYank","miku miku mi！")
 
-	notify_template("FileChangedShell","FileChangedShell","天动万象")
+	notify_template("FileChangedShell","FileChangedShell","No-o!")
+	notify_template("SwapExists", "Swap Exists", "No-o！")
 
-	notify_template("InsertEnter","InsertEnter","闪耀时刻！")
-	notify_template("InsertLeave","InsertLeave","命运，在此显现！")
-
+	notify_template("InsertEnter","InsertEnter","哒哒哒！")
+	notify_template("InsertLeave","InsertLeave","啦啦啦！")
 
 	notify_template("CmdlineEnter", "CmdlineEnter", "律令")
 	notify_template("CmdlineLeave", "CmdlineLeave", "噔噔！")
 
 	notify_template("BufDelete", "BufDelete", "请看这边！")
-	notify_template("BufModifiedSet", "BufModifiedSet", "miku da yo aaa~")
-
-	notify_template("CompleteDone", "CompleteDone", "审判！")
 
 	notify_template("FocusGained", "FocusGained", "我得集中精神！")
 	notify_template("FocusLost", "FocusLost", "向着星辰与深渊")
@@ -81,7 +78,7 @@ local function autocmds(notifymod)
 	notify_template("RecordingEnter", "Recording", "来点灯光")
 	notify_template("RecordingLeave", "Recorded", "魔术开场")
 
-	notify_template("SwapExists", "Swap Exists", "泡影看破！")
+	notify_template("CompleteDone", "CompleteDone", "锵锵！")
 
 end
 

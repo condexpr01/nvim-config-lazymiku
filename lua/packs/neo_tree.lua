@@ -20,8 +20,13 @@ return {
 
 			window = {
 				mappings = {
+					["/"] = "",
+					["#"] = "",
+					["*"] = "",
 					["-"] = "navigate_up",
-					["="] = "set_root"
+					["="] = "set_root",
+					["?"] = "fuzzy_finder",
+					["g?"] = "show_help",
 				}
 			}
 		}
