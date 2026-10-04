@@ -22,6 +22,13 @@ return{
 			relative_width=true
 		},
 
-		follow_cursor = false
+		follow_cursor = false,
+
+		keymaps = {
+			show_help = 'g?',
+			fold = "zc",
+			unfold = "zo",
+			fold_toggle = '<Tab>',
+		},
 	}
 }
