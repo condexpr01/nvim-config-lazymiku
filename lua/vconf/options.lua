@@ -20,30 +20,33 @@ vim.opt.modeline = false        -- 不要读模式行
 vim.opt.expandtab = false       -- Tab替代为空格
 vim.opt.tabstop = 4             -- Tab宽度
 vim.opt.shiftwidth = 4          -- tab转变宽度
-vim.opt.softtabstop = 4         -- Tab插入删除的列长
 
--- `indentexpr`为缩进源, 交给lsp去设置
--- {visual}=在`indentexpr`无设置时使用内部函数
-vim.cmd([[filetype on]])         -- filetype
-vim.cmd([[filetype plugin on]])  -- filetype插件
-vim.cmd([[filetype indent on]])  -- filetype缩进
+vim.cmd([[filetype on]])        -- filetype
+vim.cmd([[filetype plugin off]])-- filetype插件
 
--- 在输入时不要用indentexpr缩进
+-- `indentexpr`为缩进源, 交给tree-sitter去设置
+vim.cmd([[filetype indent on]])
+-- 在输入时期望不用indentexpr缩进
+-- 期望在使用=时候使用indentexpr
 vim.opt.indentkeys=""
+vim.opt.indentexpr=""
 
 vim.opt.cindent     = false     -- 智能c缩进
 vim.opt.cinkeys     = ""        -- 智能c缩进
 vim.opt.smartindent = false     -- 智能缩进
+vim.opt.formatoptions = ""      -- 不让`autoindent`格式化,
+
+vim.opt.softtabstop = 0         -- disable softtabstop
+vim.opt.copyindent  = true      -- 复制上个非空白符的缩进换行
 vim.opt.autoindent  = true      -- 使用上个非空白符的缩进换行
-vim.opt.formatoptions = ""      -- filetype关闭下,不让`autoindent`格式化,
 
 
 vim.opt.ignorecase = true       -- 匹配忽略大小写
 vim.opt.smartcase = false       -- 大写无视`ignorecase`,小写匹配大小写
-vim.opt.hlsearch =  true        -- 高亮搜索
+vim.opt.hlsearch  = true        -- 高亮搜索
 vim.opt.incsearch = true        -- 实时预览搜索结果
 
-vim.opt.signcolumn = "yes"      --行号左边多一列信息
+vim.opt.signcolumn = "yes"      -- 行号左边多一列信息
 
 vim.opt.autoread = false        -- 自动读取修改
 vim.opt.autowrite = false       -- 自动写入

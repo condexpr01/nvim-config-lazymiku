@@ -9,11 +9,11 @@
 
 -- #warning#: no exception handling, handle when require
 
--- force no indentkeys
+--[[
 vim.api.nvim_create_autocmd("FileType", {
     pattern = "*",
     callback = function()
-        vim.opt.indentkeys = ""
-        vim.opt.expandtab = false
     end,
 })
+]]
+
