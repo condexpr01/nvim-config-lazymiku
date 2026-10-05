@@ -9,11 +9,12 @@
 
 -- #warning#: no exception handling, handle when require
 
---[[
 vim.api.nvim_create_autocmd("FileType", {
-    pattern = "*",
-    callback = function()
-    end,
+	pattern = "*",
+	callback = function()
+		vim.opt.indentkeys=""
+		vim.opt.expandtab = false
+		vim.opt.softtabstop = 0
+	end,
 })
-]]
 

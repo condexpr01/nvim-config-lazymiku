@@ -17,26 +17,31 @@ vim.opt.scrolloff = 0           -- 开始滚动当光标上下距离为
 vim.opt.sidescrolloff = 0       -- 开始滚动当光标左右距离为
 
 vim.opt.modeline = false        -- 不要读模式行
-vim.opt.expandtab = false       -- Tab替代为空格
 vim.opt.tabstop = 4             -- Tab宽度
 vim.opt.shiftwidth = 4          -- tab转变宽度
 
 vim.cmd([[filetype on]])        -- filetype
-vim.cmd([[filetype plugin off]])-- filetype插件
+vim.cmd([[filetype plugin on]]) -- filetype插件
+vim.cmd([[filetype indent on]]) -- filetype对齐
 
 -- `indentexpr`为缩进源, 交给tree-sitter去设置
-vim.cmd([[filetype indent on]])
 -- 在输入时期望不用indentexpr缩进
 -- 期望在使用=时候使用indentexpr
-vim.opt.indentkeys=""
 vim.opt.indentexpr=""
+
+-- #######################
+-- 会被覆盖的设置:
+-- lua/vconf/autocmds.lua里将接管indentkeys, expandtab, softtabstop
+-- vim.opt.indentkeys=""
+-- vim.opt.expandtab = false       -- Tab替代为空格
+-- vim.opt.softtabstop = 0         -- disable softtabstop
+-- #######################
 
 vim.opt.cindent     = false     -- 智能c缩进
 vim.opt.cinkeys     = ""        -- 智能c缩进
 vim.opt.smartindent = false     -- 智能缩进
 vim.opt.formatoptions = ""      -- 不让`autoindent`格式化,
 
-vim.opt.softtabstop = 0         -- disable softtabstop
 vim.opt.copyindent  = true      -- 复制上个非空白符的缩进换行
 vim.opt.autoindent  = true      -- 使用上个非空白符的缩进换行
 
