@@ -40,6 +40,7 @@ vim.opt.indentexpr=""
 vim.opt.cindent     = false     -- 智能c缩进
 vim.opt.cinkeys     = ""        -- 智能c缩进
 vim.opt.smartindent = false     -- 智能缩进
+vim.opt.smarttab    = false     -- 智能Tab
 vim.opt.formatoptions = ""      -- 不让`autoindent`格式化,
 
 vim.opt.copyindent  = true      -- 复制上个非空白符的缩进换行
