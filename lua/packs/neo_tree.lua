@@ -12,6 +12,7 @@ return {
 	lazy = false, -- neo-tree will lazily load itself
 
 	opts ={
+
 		filesystem = {
 			filtered_items = {
 				visible = true,
@@ -29,8 +30,23 @@ return {
 					["?"] = "fuzzy_finder",
 					["g?"] = "show_help",
 				}
-			}
+			},
+
+			follow_current_file = {
+				enabled = true,
+				leave_dirs_open = true,
+			},
+		},
+
+		buffers = {
+			follow_current_file = {
+				-- This will find and focus the file in the active buffer every time
+				enabled = true,
+				-- `false` closes auto expanded dirs, such as with `:Neotree reveal`
+				leave_dirs_open = true,
+			},
 		}
+
 
 	},
 
