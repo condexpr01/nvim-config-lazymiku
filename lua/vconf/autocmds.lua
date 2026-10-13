@@ -12,9 +12,11 @@
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "*",
 	callback = function()
-		vim.opt.indentkeys=""
-		vim.opt.expandtab = false
-		vim.opt.softtabstop = 0
+		-- schedule it to execute last
+		vim.schedule(function()
+			vim.opt.indentkeys=""
+			vim.opt.expandtab = false
+			vim.opt.softtabstop = 0
+		end)
 	end,
 })
-

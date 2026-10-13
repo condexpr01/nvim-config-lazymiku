@@ -8,7 +8,7 @@ return {
 		"nvim-lua/plenary.nvim",
 		"MunifTanjim/nui.nvim",
 		"nvim-tree/nvim-web-devicons", -- optional, but recommended
-        -- { "3rd/image.nvim", opts = {} }, -- Optional image support
+		--{ "3rd/image.nvim", opts = {} }, -- Optional image support
 	},
 
 	lazy = false, -- neo-tree will lazily load itself
