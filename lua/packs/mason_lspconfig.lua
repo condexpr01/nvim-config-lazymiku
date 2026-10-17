@@ -10,6 +10,7 @@ return {
 		ensure_installed ={
 			-- if uncomment, ensure it has same version as your clang++
 			--"clangd",
+
 			--"ast_grep",
 			--"harper_ls",
 			--"lua_ls",
@@ -20,6 +21,7 @@ return {
 			--"jsonls",
 			--"yamlls",
 			--"glsl_analyzer",
+			--"jdtls",
 		},
 
 	},
