@@ -6,7 +6,9 @@ return {
 
 	"folke/noice.nvim",
 
-	event = "VeryLazy",
+	-- neovide maybe temporarily enable ext_cmdline, ext_messages at startup
+	-- if using VeryLazy, bug appears
+	event = "CmdlineEnter",
 
 	dependencies = {
 		"MunifTanjim/nui.nvim",
